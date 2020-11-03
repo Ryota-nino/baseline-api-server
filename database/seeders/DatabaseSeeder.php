@@ -16,6 +16,12 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call(PrefectureTableSeeder::class);
+
         Company::factory(50)->create();
+        Company::all()->each(function (Company $company) {
+           $company->prefectures()->attach(rand(1, 47));
+        });
+
+
     }
 }

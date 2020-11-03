@@ -17,4 +17,9 @@ class Company extends Model
         'logo_path',
         'company_url'
     ];
+
+    public function prefectures()
+    {
+        return $this->belongsToMany(Prefecture::class, 'company_prefectures');
+    }
 }
