@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\MyActivity;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         User::factory(100)->create();
+         User::factory(50)->create();
+         MyActivity::factory(200)->create();
     }
 }
