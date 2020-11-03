@@ -14,12 +14,13 @@ class CreateMyActivitiesTable extends Migration
     public function up()
     {
         Schema::create('my_activities', function (Blueprint $table) {
-            $table->bigInteger('user_id')->unsigned();
+            $table->id();
             $table->text('content');
             $table->bigInteger('posted_year');
+            $table->bigInteger('posted_by')->unsigned();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('posted_by')->references('id')->on('users');
         });
     }
 

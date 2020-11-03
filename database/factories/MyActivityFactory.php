@@ -22,7 +22,7 @@ class MyActivityFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->numberBetween(1, 50),
+            'posted_by' => $this->faker->numberBetween(1, 50),
             'content' => $this->faker->text($this->faker->numberBetween(30, 200)),
             'posted_year' => $this->faker->numberBetween(1,4),
         ];
