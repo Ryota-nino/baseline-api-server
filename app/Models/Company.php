@@ -9,5 +9,12 @@ class Company extends Model
 {
     use HasFactory;
 
-
+    protected $fillable = [
+        'frigana',
+        'company_name',
+        'business_description',
+        'number_of_employees',
+        'logo_path',
+        'company_url'
+    ];
 }
