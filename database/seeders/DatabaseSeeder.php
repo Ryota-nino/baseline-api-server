@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Company;
 use App\Models\MyActivity;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,7 +25,12 @@ class DatabaseSeeder extends Seeder
 
         Company::factory(50)->create();
         Company::all()->each(function (Company $company) {
-           $company->prefectures()->attach(rand(1, 47));
+            for ($i = 0; $i < rand(0, 5); $i++) {
+                try {
+                    $company->prefectures()->attach(rand(1, 47));
+                } catch (QueryException $qe) {
+                }
+            }
         });
 
 
