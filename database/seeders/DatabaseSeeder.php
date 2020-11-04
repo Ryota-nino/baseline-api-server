@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         MyActivity::factory(200)->create();
 
         $this->call(PrefectureTableSeeder::class);
+        $this->call(InternshipSeeder::class);
 
         Company::factory(50)->create();
         Company::all()->each(function (Company $company) {
