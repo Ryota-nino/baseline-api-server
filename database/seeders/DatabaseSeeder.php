@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 
 use App\Models\Company;
+use App\Models\Draft;
 use App\Models\MyActivity;
 use App\Models\User;
 use Illuminate\Database\QueryException;
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(50)->create();
         MyActivity::factory(200)->create();
+        Draft::factory(200)->create();
 
         $this->call(PrefectureTableSeeder::class);
 
@@ -32,7 +34,5 @@ class DatabaseSeeder extends Seeder
                 }
             }
         });
-
-
     }
 }
