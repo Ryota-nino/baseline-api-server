@@ -25,7 +25,7 @@ class CompanyInformationFactory extends Factory
             'user_id' => $this->faker->numberBetween(1, 50),
             'company_id' => $this->faker->numberBetween(1, 50),
             'internship_id' => $this->faker->numberBetween(1, 4),
-            'occupational_category' => $this->faker->numberBetween(1, 27),
+            'occupational_category_id' => $this->faker->numberBetween(1, 25),
         ];
     }
 }
