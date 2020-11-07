@@ -10,4 +10,6 @@ class Selection extends Model
     use HasFactory;
 
     protected $fillable = ['title', 'content'];
+
+    public $timestamps = false;
 }

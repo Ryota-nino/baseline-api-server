@@ -5,9 +5,9 @@ namespace Database\Seeders;
 
 use App\Models\Company;
 use App\Models\Draft;
-use App\Models\CompanyInformation;
 use App\Models\EmploymentStatus;
 use App\Models\MyActivity;
+use App\Models\Selection;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Seeder;
@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
             }
         });
 
-        CompanyInformation::factory(200)->create();
+//        CompanyInformation::factory(200)->create();
         // 就職状況をランダムで生成
         for ($i = 0; $i < 200; $i++) {
             try {
@@ -47,6 +47,9 @@ class DatabaseSeeder extends Seeder
             } catch (QueryException $qe) {
             }
         }
+
+        Selection::factory(50)->create();
+
 
     }
 }
