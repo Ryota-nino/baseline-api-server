@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmploymentStatus extends Migration
+class EmploymentStatusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,11 +18,12 @@ class CreateEmploymentStatus extends Migration
             $table->bigInteger('company_id')->unsigned();
             $table->bigInteger('official_offer')->unsigned();
             $table->bigInteger('decision_offer')->unsigned();
-            $table->string('occupational_categories_id');
+            $table->bigInteger('occupational_category_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('company_id')->references('id')->on('users');
+            $table->foreign('occupational_category_id')->references('id')->on('occupational_categories');
             $table->primary(['company_id', 'user_id']);
         });
     }
