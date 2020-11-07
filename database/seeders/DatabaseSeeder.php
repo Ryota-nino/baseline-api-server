@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 
 use App\Models\Company;
+use App\Models\CompanyInformation;
 use App\Models\MyActivity;
 use App\Models\User;
 use Illuminate\Database\QueryException;
@@ -34,6 +35,6 @@ class DatabaseSeeder extends Seeder
             }
         });
 
-
+        CompanyInformation::factory(200)->create();
     }
 }
