@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,16 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*
-|--------------------------------------------------------------------------
-| 認証ルート(Auth)
-|--------------------------------------------------------------------------
-|
-|
-|
-*/
-Route::prefix('auth')->group(function () {
-    Route::post('/login', [AuthController::class, 'login']); // ログイン
-    Route::post('/logout', [AuthController::class, 'logout']); // ログアウト
-});
+
 
