@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    /**
+     * ログイン
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(Request $request)
     {
         $request->validate([
@@ -32,5 +37,18 @@ class AuthController extends Controller
         return response()->json([
             'message' => $message
         ], $status);
+    }
+
+    /**
+     * ログアウト
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout()
+    {
+        Auth::logout();
+
+        return response()->json([
+            'message' => 'OK'
+        ], 200);
     }
 }
