@@ -9,15 +9,20 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        $credential = $request->validate([
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required',
+            'active' => 'required|boolean',
         ]);
 
         // 初期値ログインに成功したりすると値が変更変わる
         $status = 401;
         $message = 'Unauthorized';
 
+        // ログインするための情報
+        $credential = $request->only(['email', 'password']);
+
+        // 認証実行
         if (Auth::attempt($credential)) {
             // 認証成功
             $status = 200;
