@@ -14,10 +14,12 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+        // 初期値ログインに成功したりすると値が変更変わる
         $status = 401;
         $message = 'Unauthorized';
 
         if (Auth::attempt($credential)) {
+            // 認証成功
             $status = 200;
             $message = 'OK';
         }
