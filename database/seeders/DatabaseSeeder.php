@@ -4,10 +4,11 @@ namespace Database\Seeders;
 
 use App\Models\CompanyComment;
 use App\Models\Company;
-use App\Models\CompanyInformation;
 use App\Models\Draft;
+use App\Models\CompanyInformation;
 use App\Models\EmploymentStatus;
 use App\Models\MyActivity;
+use App\Models\Selection;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Seeder;
@@ -50,7 +51,6 @@ class DatabaseSeeder extends Seeder
             }
         });
 
-        CompanyInformation::factory(200)->create();
         // 就職状況をランダムで生成
         for ($i = 0; $i < 200; $i++) {
             try {
@@ -59,7 +59,10 @@ class DatabaseSeeder extends Seeder
             }
         }
 
+        // 企業コメントをランダムで生成
         CompanyComment::factory(50)->create();
 
+        // 投票をランダムで生成
+        Selection::factory(50)->create();
     }
 }
