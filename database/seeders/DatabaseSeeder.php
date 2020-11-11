@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-
+use App\Models\CompanyComment;
 use App\Models\Company;
 use App\Models\CompanyInformation;
 use App\Models\Draft;
@@ -58,6 +58,8 @@ class DatabaseSeeder extends Seeder
             } catch (QueryException $qe) {
             }
         }
+
+        CompanyComment::factory(50)->create();
 
     }
 }
