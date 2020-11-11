@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\CompanyComment;
 use App\Models\Company;
+use App\Models\CompanyComment;
 use App\Models\CompanyInformation;
+use App\Models\Draft;
 use App\Models\EmploymentStatus;
 use App\Models\MyActivity;
 use App\Models\Selection;
@@ -13,6 +14,8 @@ use Faker\Factory as FakerFactory;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
