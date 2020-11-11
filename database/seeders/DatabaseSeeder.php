@@ -4,13 +4,16 @@ namespace Database\Seeders;
 
 
 use App\Models\Company;
-use App\Models\Draft;
 use App\Models\CompanyInformation;
+use App\Models\Draft;
 use App\Models\EmploymentStatus;
 use App\Models\MyActivity;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,6 +24,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('users')->insert([
+            'name' => 'ララベル アドミン',
+            'email' => 'laravel-a@example.com',
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ]);
+
+
         User::factory(50)->create();
         MyActivity::factory(200)->create();
         Draft::factory(200)->create();
