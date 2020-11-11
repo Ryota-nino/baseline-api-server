@@ -14,4 +14,6 @@ class Entry extends Model
         'title',
         'content',
     ];
+
+    public $timestamps = false;
 }

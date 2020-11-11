@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Entry;
 use App\Models\Company;
-use App\Models\Draft;
 use App\Models\CompanyInformation;
+use App\Models\Draft;
 use App\Models\EmploymentStatus;
+use App\Models\Entry;
 use App\Models\MyActivity;
 use App\Models\User;
 use Illuminate\Database\QueryException;
@@ -24,8 +24,7 @@ class DatabaseSeeder extends Seeder
         User::factory(50)->create();
         MyActivity::factory(200)->create();
         Draft::factory(200)->create();
-        Entry::factory(50)->create();
-        
+
         $this->call(PrefectureTableSeeder::class);
         $this->call(InternshipSeeder::class);
         $this->call(OccupationalCategoriesSeeder::class);
@@ -49,6 +48,8 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        
+        Entry::factory(50)->create();
+
+
     }
 }
