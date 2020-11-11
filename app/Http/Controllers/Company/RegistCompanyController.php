@@ -11,8 +11,8 @@ class RegistCompanyController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke(Request $request)
     {
@@ -42,7 +42,7 @@ class RegistCompanyController extends Controller
 
         //都道府県と紐付け
         $company->prefectures()->attach($request->prefecture_id);
-            
+
         return response()->json([
             'message' => $message
         ], $status);
