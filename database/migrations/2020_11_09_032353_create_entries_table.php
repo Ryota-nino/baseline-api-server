@@ -15,11 +15,12 @@ class CreateEntriesTable extends Migration
     {
         Schema::create('entries', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('company_information_id')->unsigned();
+            $table->bigInteger('company_information_id')
+                ->unsigned();
             $table->string('title');
             $table->text('content');
 
-            $table->foreign('company_information_id')->references('id')->on('company_information');
+            $table->foreign('company_information_id')->references('id')->on('company_information')->cascadeOnDelete();
         });
     }
 
