@@ -7,6 +7,7 @@ use App\Models\CompanyComment;
 use App\Models\CompanyInformation;
 use App\Models\Draft;
 use App\Models\EmploymentStatus;
+use App\Models\Entry;
 use App\Models\MyActivity;
 use App\Models\Selection;
 use App\Models\User;
@@ -90,5 +91,6 @@ class DatabaseSeeder extends Seeder
                     }
                 }
             });
+        Entry::factory(50)->create();
     }
 }
