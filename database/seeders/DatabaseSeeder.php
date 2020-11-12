@@ -28,7 +28,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'ララベル アドミン',
+            'first_name' => 'アドミン',
+            'last_name' => 'ララベル',
+            'sex' => 3,
+            'year_of_graduation' => 22,
+            'icon_image_path' => 'storage/example_user_icon.jpg',
+            'desired_occupations' => 0,
+            'privilege' => 0,
             'email' => 'laravel-a@example.com',
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
