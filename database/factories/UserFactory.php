@@ -23,6 +23,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
+            'student_number' => '2190' . $this->faker->numberBetween(100, 999),
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
             'sex' => $this->faker->numberBetween(0, 2),

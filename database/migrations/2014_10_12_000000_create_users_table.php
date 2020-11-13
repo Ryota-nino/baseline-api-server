@@ -15,6 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('student_number');
             $table->string('first_name');
             $table->string('last_name');
             $table->bigInteger('sex'); # 性別

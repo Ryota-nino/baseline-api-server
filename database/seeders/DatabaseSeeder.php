@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
+            'student_number' => 0000000,
             'first_name' => 'アドミン',
             'last_name' => 'ララベル',
             'sex' => 3,
