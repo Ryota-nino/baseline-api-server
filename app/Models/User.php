@@ -23,7 +23,6 @@ class User extends Authenticatable
         'year_of_graduation',
         'icon_image_path',
         'desired_occupations',
-        'desired_occupations',
         'privilege',
         'email',
         'password',
@@ -47,4 +46,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function desired_occupation()
+    {
+        return $this->belongsTo(OccupationalCategory::class, 'desired_occupations', '');
+    }
 }

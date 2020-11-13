@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Company\RegistCompanyController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\User\ShowUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,9 +27,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('auth')->group(function () {
     Route::post('/login', [AuthController::class, 'login']); // ログイン
     Route::post('/logout', [AuthController::class, 'logout']); // ログアウト
-    Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-        return $request->user();
-    });
+    Route::middleware('auth:sanctum')->get('/user', ShowUserController::class);
 });
 
 Route::prefix('company')->group(function () {
