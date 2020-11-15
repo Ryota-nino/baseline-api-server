@@ -44,7 +44,7 @@ class RegistCompanyController extends Controller
         //TODO サイズのバリデート
 
         // 画像を保存
-        Storage::put($imageName, base64_decode($image));
+        Storage::disk('public')->put($imageName, base64_decode($image));
         // パスの取り出し
         $logo_path = Storage::url($imageName);
 
