@@ -29,19 +29,22 @@ class EditCompanyController extends Controller
             'logo_path' => $request->logo_path,
             'company_url' => $request->company_url,
         ];
+        
+        $company = Company::findOrfail($request->id);
 
-        //$company = Company::where('id',$request->id)
-            //->update($param);
-
-        if(!Company::where('id',$request->id)->update($param)){
+        if(!$company){
             $status = 400;
             $message = 'Bad Request';
         }
 
-        //$company->prefectures()->attach($request->prefecture_id);
+        $company->prefectures()->detach();
+        $company->prefectures()->attach($request->prefecture_id);
 
+        $company->where('id',$request->id)->update($param);
+        
         return response()->json([
             'message' => $message,
+            'data' => $company
         ], $status);
     }
 }

@@ -18,7 +18,7 @@ class InterviewContentsTable extends Migration
             $table->bigInteger('interview_id')->unsigned();
             $table->text('content');
 
-            $table->foreign('interview_id')->references('id')->on('interviews');
+            $table->foreign('interview_id')->references('id')->on('interviews')->cascadeOnUpdate();
         });
     }
 

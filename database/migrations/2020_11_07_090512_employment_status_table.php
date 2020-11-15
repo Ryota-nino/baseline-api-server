@@ -21,9 +21,9 @@ class EmploymentStatusTable extends Migration
             $table->bigInteger('occupational_category_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('company_id')->references('id')->on('users');
-            $table->foreign('occupational_category_id')->references('id')->on('occupational_categories');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate();
+            $table->foreign('company_id')->references('id')->on('users')->cascadeOnUpdate();
+            $table->foreign('occupational_category_id')->references('id')->on('occupational_categories')->cascadeOnUpdate();
             $table->primary(['company_id', 'user_id']);
         });
     }

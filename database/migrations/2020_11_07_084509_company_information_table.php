@@ -20,10 +20,10 @@ class CompanyInformationTable extends Migration
             $table->bigInteger('internship_id')->unsigned();
             $table->bigInteger('occupational_category_id')->unsigned();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('company_id')->references('id')->on('companies');
-            $table->foreign('internship_id')->references('id')->on('internships');
-            $table->foreign('occupational_category_id')->references('id')->on('occupational_categories');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate();
+            $table->foreign('company_id')->references('id')->on('companies')->cascadeOnUpdate();
+            $table->foreign('internship_id')->references('id')->on('internships')->cascadeOnUpdate();
+            $table->foreign('occupational_category_id')->references('id')->on('occupational_categories')->cascadeOnUpdate();
 
 
             $table->timestamps();

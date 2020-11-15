@@ -17,8 +17,8 @@ class CompanyPrefectures extends Migration
             $table->bigInteger('company_id')->unsigned();
             $table->bigInteger('prefecture_id')->unsigned();
 
-            $table->foreign('company_id')->references('id')->on('companies');
-            $table->foreign('prefecture_id')->references('id')->on('prefectures');
+            $table->foreign('company_id')->references('id')->on('companies')->cascadeOnUpdate();
+            $table->foreign('prefecture_id')->references('id')->on('prefectures')->cascadeOnUpdate();
         });
     }
 

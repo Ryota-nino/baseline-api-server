@@ -19,7 +19,7 @@ class CreateSelectionsTable extends Migration
             $table->string('title');
             $table->text('content');
 
-            $table->foreign('company_information_id')->references('id')->on('company_information');
+            $table->foreign('company_information_id')->references('id')->on('company_information')->cascadeOnUpdate();
         });
     }
 
