@@ -4,15 +4,14 @@ namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
-use Illuminate\Http\Request;
 
 class DeleteCompanyController extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke($id)
     {
@@ -22,7 +21,7 @@ class DeleteCompanyController extends Controller
         $message = 'OK';
 
         //Company::destroy($request->id);
-        if(!Company::find($id)->delete()) {
+        if (!Company::findOrFail($id)->delete()) {
             $status = 400;
             $message = 'Bad Request';
         }
