@@ -20,23 +20,24 @@ class ShowCompanyController extends Controller
         //ToDo Validate
 
         $status = 200;
-        $message = 'OK';
 
-        if(!Company::select($id)) {
-            $status = 400;
-            $message = 'Bad Request';
-        }
+        $company = Company::findOrfail($id);
 
-        $company_data = DB::table('companies')
-                            ->join('company_prefectures', 'companies.id', '=', 'company_prefectures.company_id')
-                            ->select('id','frigana','company_name','business_description','number_of_employees',
-                                'logo_path','company_url','company_id','prefecture_id')
-                            ->where('companies.id', '=', $id)
-                            ->get();
+        $company_data = [
+            "id" => $company->id,
+            "frigana" => $company->frigana,
+            "company_name" => $company->company_name,
+            "business_description" => $company->business_description,
+            "number_of_employees" => $company->number_of_employees,
+            "logo_path" => $company->logo_path,
+            "company_url" => $company->company_url,
+            "created_at" => $company->created_at,
+            "updated_at" => $company->updated_at,
+            "prefectures" => array_column($company->prefectures->toArray(), 'id'),
+        ];
 
-        return response()->json([
-            'message' => $message,
-            'data' => $company_data
-        ], $status);
+        return response()->json(
+            $company_data, $status
+        );
     }
 }
