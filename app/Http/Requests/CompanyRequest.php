@@ -33,7 +33,6 @@ class CompanyRequest extends FormRequest
             'prefecture_id' => 'required|array',
             'prefecture_id.*' => 'integer|between:1,47',
             'number_of_employees' => 'required|integer',
-            'logo_path' => 'required',
             'company_url' => 'required|url',
         ];
     }
