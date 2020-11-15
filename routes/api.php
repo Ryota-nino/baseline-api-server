@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Company\RegistCompanyController;
 use App\Http\Controllers\User\ShowUserController;
+use App\Http\Controllers\Company\DeleteCompanyController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +34,7 @@ Route::prefix('auth')->group(function () {
 
 Route::prefix('company')->group(function () {
     Route::post('/', RegistCompanyController::class);
+    Route::post('/delete/{id}', DeleteCompanyController::class);
 });
 
 
