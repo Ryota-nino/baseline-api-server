@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $companies = Company::with('prefectures')->orderBy('created_at', 'desc')->limit(5)->get();
+        $companies = Company::with('prefectures')->orderBy('created_at', 'desc')->limit(4)->get();
 
         $result_companies = [];
 
