@@ -15,13 +15,13 @@ class EditCompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(CompanyRequest $request)
+    public function __invoke($id, CompanyRequest $request)
     {
         $status = 200;
         $message = 'OK';
 
         $param = [
-            'id' => $request->id,
+            'id' => $id,
             'frigana' => $request->frigana,
             'company_name' => $request->company_name,
             'business_description' => $request->business_description,
@@ -30,7 +30,7 @@ class EditCompanyController extends Controller
             'company_url' => $request->company_url,
         ];
         
-        $company = Company::findOrfail($request->id);
+        $company = Company::findOrfail($id);
 
         if(!$company){
             $status = 400;
@@ -40,7 +40,7 @@ class EditCompanyController extends Controller
         $company->prefectures()->detach();
         $company->prefectures()->attach($request->prefecture_id);
 
-        $company->where('id',$request->id)->update($param);
+        $company->where('id',$id)->update($param);
         
         return response()->json([
             'message' => $message,

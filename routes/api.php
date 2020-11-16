@@ -38,7 +38,7 @@ Route::prefix('auth')->group(function () {
 Route::prefix('company')->group(function () {
     Route::post('/', RegistCompanyController::class);
     Route::post('/show/{id}', ShowCompanyController::class);
-    Route::post('/edit', EditCompanyController::class);
+    Route::post('/edit/{id}', EditCompanyController::class);
 });
 
 
