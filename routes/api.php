@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Company\RegistCompanyController;
-use App\Http\Controllers\Company\ShowCompanyController;
-use App\Http\Controllers\User\ShowUserController;
 use App\Http\Controllers\Company\DeleteCompanyController;
+use App\Http\Controllers\Company\RegistCompanyController;
+use App\Http\Controllers\Company\SearchCompanyController;
+use App\Http\Controllers\Company\ShowCompanyController;
 use App\Http\Controllers\HomeController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\User\ShowUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +38,7 @@ Route::prefix('company')->group(function () {
     Route::post('/', RegistCompanyController::class);
     Route::post('/show/{id}', ShowCompanyController::class);
     Route::post('/delete/{id}', DeleteCompanyController::class);
+    Route::get('/search', SearchCompanyController::class);
 });
 
 Route::get('/home', HomeController::class);
