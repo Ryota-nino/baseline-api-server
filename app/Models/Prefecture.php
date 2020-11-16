@@ -13,6 +13,8 @@ class Prefecture extends Model
         'name',
     ];
 
+    protected $hidden = ['pivot'];
+
     public function companies()
     {
         return $this->belongsToMany(Company::class, 'company_prefectures');
