@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\MyActivity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -34,8 +36,20 @@ class HomeController extends Controller
             ]);
         }
 
+
+        // ログインユーザの取得
+        $user = Auth::user();
+
+        $my_activities = MyActivity::with('users');
+
+        // アクティビティを取得し投稿者を表示
+        $my_activity = $my_activities->where("posted_by", "like", $user->id)->orderBy('created_at', 'desc')->limit(2)->get();;
+        $other_activity = $my_activities->where("posted_by", "not like", $user->id)->orderBy('created_at', 'desc')->limit(3)->get();
+
         return response()->json([
             "companies" => $result_companies,
+            "my_activities" => $my_activity,
+            "other_activities" => $other_activity
         ]);
     }
 }
