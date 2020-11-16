@@ -13,4 +13,9 @@ class MyActivity extends Model
         'content',
         'posted_year'
     ];
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'posted_by');
+    }
 }
