@@ -65,7 +65,7 @@ class SearchCompanyController extends Controller
             $companies->orderBy('created_at', 'desc');
         }
 
-        $company_paginate = $companies->paginate();
+        $company_paginate = $companies->paginate(6);
 
 
         return $company_paginate;
