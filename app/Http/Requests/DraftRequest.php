@@ -24,7 +24,6 @@ class DraftRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|integer',
             'content' => 'required',
             'posted_by' => 'required|integer'
         ];
