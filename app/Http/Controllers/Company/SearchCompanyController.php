@@ -28,7 +28,13 @@ class SearchCompanyController extends Controller
         // 古い順
         $older = $request->query('older');
 
-        //TODO 人数
+        //TODO 従業員数検索
+        $max_number_of_employees = $request->query('max_number_of_employees');
+        $in_number_of_employees = $request->query('max_number_of_employees');
+
+        //TODO 卒業生の在籍
+        $enrollment_of_graduates = $request->query('enrollment_of_graduates');
+
 
         $companies = Company::query()->with('prefectures:name');
 
