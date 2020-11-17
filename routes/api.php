@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Company\RegistCompanyController;
+use App\Http\Controllers\Draft\DeleteDraftController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,4 +37,6 @@ Route::prefix('company')->group(function () {
     Route::post('/', RegistCompanyController::class);
 });
 
-
+Route::prefix('draft')->group(function () {
+    Route::post('/delete/{id}', DeleteDraftController::class);
+});
