@@ -25,7 +25,9 @@ class SearchCompanyController extends Controller
         // クエリから事業内容を取得
         $business_description = $request->query('business_description');
 
-        //TODO 新規か古いか
+        // 古い順
+        $older = $request->query('older');
+
         //TODO 人数
 
         $companies = Company::query()->with('prefectures:name');
@@ -57,33 +59,16 @@ class SearchCompanyController extends Controller
             $companies->where('business_description', 'like', "%$business_description%");
         }
 
-        //TODO パース処理
+        // 最新順にする処理
+        // older（古い順）がtrueなら以下は実行されない
+        if ($older == false) {
+            $companies->orderBy('created_at', 'desc');
+        }
+
         $company_paginate = $companies->paginate();
-
-        $result_companies = [];
-
-//        foreach ($company_paginate->items() as $company) {
-//            array_push($result_companies, [
-//                "id" => $company->id,
-//                "frigana" => $company->frigana,
-//                "company_name" => $company->company_name,
-//                "business_description" => $company->business_description,
-//                "number_of_employees" => $company->number_of_employees,
-//                "logo_path" => $company->logo_path,
-//                "company_url" => $company->company_url,
-//                "created_at" => $company->created_at,
-//                "updated_at" => $company->updated_at,
-//                "prefectures" => array_column($company->prefectures->toArray(), 'name'),
-//            ]);
-//        }
 
 
         return $company_paginate;
-//        return response()->json([
-//            "current_page" => $company_paginate->currentPage(),
-//            "data" => $result_companies,
-//            "first_page_url" => $company_paginate->firstItem()
-//        ]);
 
     }
 }
