@@ -5,43 +5,29 @@ namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
-use Illuminate\Support\Facades\DB;
 
 class EditCompanyController extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke($id, CompanyRequest $request)
     {
         $status = 200;
         $message = 'OK';
 
-        $param = [
-            'id' => $id,
-            'frigana' => $request->frigana,
-            'company_name' => $request->company_name,
-            'business_description' => $request->business_description,
-            'number_of_employees' => $request->number_of_employees,
-            'logo_path' => $request->logo_path,
-            'company_url' => $request->company_url,
-        ];
-        
-        $company = Company::findOrfail($id);
+        //TODO 画像データの処理
 
-        if(!$company){
-            $status = 400;
-            $message = 'Bad Request';
-        }
+        $company = Company::findOrfail($id);
 
         $company->prefectures()->detach();
         $company->prefectures()->attach($request->prefecture_id);
 
-        $company->where('id',$id)->update($param);
-        
+        $company->fill($request->all())->update();
+
         return response()->json([
             'message' => $message,
             'data' => $company
