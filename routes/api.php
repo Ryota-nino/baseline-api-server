@@ -5,6 +5,7 @@ use App\Http\Controllers\Company\DeleteCompanyController;
 use App\Http\Controllers\Company\RegistCompanyController;
 use App\Http\Controllers\Company\SearchCompanyController;
 use App\Http\Controllers\Company\ShowCompanyController;
+use App\Http\Controllers\Entry\ShowEntryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\ShowUserController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,10 @@ Route::prefix('company')->group(function () {
     Route::get('/show/{id}', ShowCompanyController::class);
     Route::post('/delete/{id}', DeleteCompanyController::class);
     Route::get('/search', SearchCompanyController::class);
+});
+
+Route::prefix('entry')->group(function () {
+    Route::get('/show/{id}', ShowEntryController::class);
 });
 
 Route::get('/home', HomeController::class);
