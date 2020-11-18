@@ -23,6 +23,7 @@ class User extends Authenticatable
         'year_of_graduation',
         'icon_image_path',
         'desired_occupations',
+        'annual',
         'privilege',
         'email',
         'password',
