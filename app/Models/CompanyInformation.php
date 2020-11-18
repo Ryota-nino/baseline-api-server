@@ -9,5 +9,10 @@ class CompanyInformation extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'user_id',
+        'company_id',
+        'internship_id',
+        'occupational_category_id',
+    ];
 }
