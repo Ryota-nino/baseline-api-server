@@ -11,6 +11,7 @@ use App\Models\Entry;
 use App\Models\MyActivity;
 use App\Models\Selection;
 use App\Models\User;
+use Carbon\Carbon;
 use Faker\Factory as FakerFactory;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Seeder;
@@ -32,7 +33,8 @@ class DatabaseSeeder extends Seeder
             'first_name' => 'アドミン',
             'last_name' => 'ララベル',
             'sex' => 3,
-            'year_of_graduation' => 22,
+            'annual' => 4,
+            'year_of_graduation' => Carbon::parse('2021/04/01'),
             'icon_image_path' => 'storage/example_user_icon.jpg',
             'desired_occupations' => 1,
             'privilege' => 0,
