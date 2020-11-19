@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,10 +21,10 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'sex',
+        'annual',
         'year_of_graduation',
         'icon_image_path',
         'desired_occupations',
-        'annual',
         'privilege',
         'email',
         'password',
@@ -52,4 +53,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(OccupationalCategory::class, 'desired_occupations', '');
     }
+
+    public function getGraduationFlagAttribute()
+    {
+        $current_date = Carbon::now();
+        $graduation_date = Carbon::parse($this->year_of_graduation);
+
+        return $graduation_date->lte($current_date);
+    }
+
+    protected $appends = ['graduation_flag'];
 }
