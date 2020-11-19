@@ -28,8 +28,9 @@ class EntryRequest extends FormRequest
             'company_id' => 'required|integer',
             'internship_id' => 'required|integer',
             'occupational_category_id' => 'required|integer',
-            'title' => 'required',
-            'content' => 'required',
+            'items' => 'required',
+            'items.*.title' => 'required',
+            'items.*.content' => 'required',
         ];
     }
 }
