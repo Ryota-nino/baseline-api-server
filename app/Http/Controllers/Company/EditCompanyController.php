@@ -18,15 +18,31 @@ class EditCompanyController extends Controller
     {
         $status = 200;
         $message = 'OK';
-
-        //TODO 画像データの処理
+        $logo_path = "";
 
         $company = Company::findOrfail($id);
 
         $company->prefectures()->detach();
         $company->prefectures()->attach($request->prefecture_id);
 
-        $company->fill($request->all())->update();
+        $company->fill($request->all());
+
+        // 画像が送信されてきているとき;
+        if ($request->logo_image) {
+            // 画像のバリデーション
+            $request->validate([
+                'logo_image' => [
+                    'regex:/data:image\/(jpg|jpeg|png);base64,\//'
+                ],
+            ]);
+
+            //TODO 削除処理
+
+            // 画像を保存しそのpathを返す処理
+            $logo_path = StoreCompanyImage::storeImage($request->logo_image);
+        }
+
+        $company->fill(['logo_path' => $logo_path])->update();
 
         return response()->json([
             'message' => $message,
