@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
+use Exception;
 use Illuminate\Support\Facades\Storage;
 
 class EditCompanyController extends Controller
@@ -37,13 +38,16 @@ class EditCompanyController extends Controller
                 ],
             ]);
 
-            var_dump($company->logo_path);
-
             // 前の画像を削除する処理
             Storage::disk('public')->delete(basename($company->logo_path));
 
             // 画像を保存しそのpathを返す処理
-            $logo_path = StoreCompanyImage::storeImage($request->logo_image);
+            try {
+                $logo_path = StoreCompanyImage::storeImage($request->logo_image);
+            } catch (Exception $e) {
+                // 画像保存が失敗したとき
+                $logo_path = "";
+            }
         }
 
         $company->fill(['logo_path' => $logo_path])->update();

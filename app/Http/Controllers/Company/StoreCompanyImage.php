@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Company;
 
+use Exception;
 use Faker\Provider\Uuid;
 use Intervention\Image\Facades\Image;
 
@@ -17,9 +18,8 @@ class StoreCompanyImage
             ->encode('jpg')
             ->fit($width, $height);
 
-        if ($image->width() < $width || $image->height() < $height) {
-            throw new \Exception('WidthSizeMismatchedError');
-        }
+        if ($image->width() < $width) throw new Exception('WidthSizeMismatchedError');
+        if ($image->height() < $height) throw new Exception('HeightSizeMismatchedError');
 
         $image_path = 'storage/' . Uuid::uuid() . '.' . 'jpg';
 
