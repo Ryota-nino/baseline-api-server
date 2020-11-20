@@ -18,10 +18,6 @@ class EditCompanyController extends Controller
      */
     public function __invoke($id, CompanyRequest $request)
     {
-        $status = 200;
-        $message = 'OK';
-        $logo_path = "";
-
         $company = Company::findOrfail($id);
 
         $company->prefectures()->detach();
@@ -29,7 +25,6 @@ class EditCompanyController extends Controller
 
         $company->fill($request->all());
 
-        // 画像が送信されてきているとき;
         if ($request->logo_image) {
             // 画像のバリデーション
             $request->validate([
@@ -38,23 +33,30 @@ class EditCompanyController extends Controller
                 ],
             ]);
 
-            // 前の画像を削除する処理
-            Storage::disk('public')->delete(basename($company->logo_path));
+            $old_logo_path = basename($company->logo_path);
 
             // 画像を保存しそのpathを返す処理
             try {
-                $logo_path = StoreCompanyImage::storeImage($request->logo_image);
+                $new_logo_path = StoreCompanyImage::storeImage($request->logo_image);
+                $company->fill(['logo_path' => $new_logo_path]);
+
+                // 前の画像を削除する処理
+                Storage::disk('public')->delete($old_logo_path);
+
             } catch (Exception $e) {
                 // 画像保存が失敗したとき
-                $logo_path = "";
+                return response()->json([
+                    'message' => 'SaveFailedError',
+                ], 400);
+
             }
         }
 
-        $company->fill(['logo_path' => $logo_path])->update();
+        $company->update();
 
         return response()->json([
-            'message' => $message,
+            'message' => 'OK',
             'data' => $company
-        ], $status);
+        ], 200);
     }
 }
