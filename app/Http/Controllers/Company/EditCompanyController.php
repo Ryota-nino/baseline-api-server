@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
+use Illuminate\Support\Facades\Storage;
 
 class EditCompanyController extends Controller
 {
@@ -36,7 +37,10 @@ class EditCompanyController extends Controller
                 ],
             ]);
 
-            //TODO 削除処理
+            var_dump($company->logo_path);
+
+            // 前の画像を削除する処理
+            Storage::disk('public')->delete(basename($company->logo_path));
 
             // 画像を保存しそのpathを返す処理
             $logo_path = StoreCompanyImage::storeImage($request->logo_image);
