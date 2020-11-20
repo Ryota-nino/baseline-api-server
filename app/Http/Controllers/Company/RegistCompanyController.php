@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
 use Faker\Provider\Uuid;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class RegistCompanyController extends Controller
@@ -19,20 +18,6 @@ class RegistCompanyController extends Controller
      */
     public function __invoke(CompanyRequest $request)
     {
-        //validate
-        $request->validate([
-            'frigana' => [
-                'required',
-                'regex:/^[ア-ン゛゜ァ-ォャ-ョー]+$/u'
-            ],
-            'company_name' => 'required',
-            'business_description' => 'required',
-            'prefecture_id' => 'required|array',
-            'prefecture_id.*' => 'integer|between:1,47',
-            'number_of_employees' => 'required|integer',
-            'company_url' => 'required|url',
-        ]);
-
         $company = new Company();
         $status = 200;
         $message = 'OK';
