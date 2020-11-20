@@ -28,7 +28,7 @@ class RegistCompanyController extends Controller
             // 画像のバリデーション
             $request->validate([
                 'logo_image' => [
-                    'regex:/data:image\/(jpg|jpeg|png);base64,\//'
+                    'regex:/data:image\/(jpg|jpeg|png);base64,/'
                 ],
             ]);
 

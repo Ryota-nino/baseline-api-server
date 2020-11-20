@@ -9,8 +9,17 @@ class StoreCompanyImage
 {
     public static function storeImage($src_image)
     {
+        $width = 360;
+        $height = 240;
+
         //jpeg以外も行けるようにする
-        $image = Image::make($src_image)->encode('jpg');
+        $image = Image::make($src_image)
+            ->encode('jpg')
+            ->fit($width, $height);
+
+        if ($image->width() < $width || $image->height() < $height) {
+            throw new \Exception('WidthSizeMismatchedError');
+        }
 
         $image_path = 'storage/' . Uuid::uuid() . '.' . 'jpg';
 
