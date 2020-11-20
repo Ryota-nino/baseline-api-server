@@ -18,8 +18,16 @@ class Company extends Model
         'company_url'
     ];
 
+    protected $hidden = ['logo_path'];
+    protected $appends = ['logo_image_url'];
+
     public function prefectures()
     {
         return $this->belongsToMany(Prefecture::class, 'company_prefectures');
+    }
+
+    public function getLogoImageUrlAttribute($value)
+    {
+        return asset($this->logo_path);
     }
 }
