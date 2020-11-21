@@ -13,9 +13,9 @@ class MyPageController extends Controller
      * Handle the incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Http\Response
      */
-    public function __invoke($id = null, Request $request)
+    public function __invoke(Request $request, $id = null)
     {
         // idがないときに自分のidに表示
         if (!$id) {
