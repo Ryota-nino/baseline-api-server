@@ -26,8 +26,13 @@ class Company extends Model
         return $this->belongsToMany(Prefecture::class, 'company_prefectures');
     }
 
-    public function getLogoImageUrlAttribute($value)
+    public function getLogoImageUrlAttribute()
     {
         return asset($this->logo_path);
+    }
+
+    public function company_information()
+    {
+        return $this->hasMany(CompanyInformation::class);
     }
 }

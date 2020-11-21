@@ -15,4 +15,9 @@ class Interview extends Model
         'results',
         'interview_date',
     ];
+
+    public function interview_contents()
+    {
+        return $this->hasMany(InterviewContent::class);
+    }
 }

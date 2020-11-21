@@ -10,4 +10,29 @@ class CompanyInformation extends Model
     use HasFactory;
 
     protected $fillable = [];
+
+    public function selections()
+    {
+        return $this->hasMany(Selection::class);
+    }
+
+    public function company_comments()
+    {
+        return $this->hasMany(CompanyComment::class);
+    }
+
+    public function entries()
+    {
+        return $this->hasMany(Entry::class);
+    }
+
+    public function interviews()
+    {
+        return $this->hasMany(Interview::class);
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }
