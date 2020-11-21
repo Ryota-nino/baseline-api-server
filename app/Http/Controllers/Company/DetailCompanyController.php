@@ -17,6 +17,7 @@ class DetailCompanyController extends Controller
     {
         return Company::with(
             'company_information.user',
+            'company_information.occupational_category',
             'company_information.company_comments',
             'company_information.selections',
             'company_information.entries',

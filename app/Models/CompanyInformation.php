@@ -35,4 +35,9 @@ class CompanyInformation extends Model
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
+
+    public function occupational_category()
+    {
+        return $this->hasOne(OccupationalCategory::class, 'id', 'occupational_category_id');
+    }
 }
