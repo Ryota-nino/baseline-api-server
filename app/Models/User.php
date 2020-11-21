@@ -49,10 +49,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function desired_occupation()
-    {
-        return $this->belongsTo(OccupationalCategory::class, 'desired_occupations', '');
-    }
+    protected $appends = [
+        'graduation_flag'
+    ];
 
     public function getGraduationFlagAttribute()
     {
@@ -62,5 +61,13 @@ class User extends Authenticatable
         return $graduation_date->lte($current_date);
     }
 
-    protected $appends = ['graduation_flag'];
+    public function desired_occupation()
+    {
+        return $this->belongsTo(OccupationalCategory::class, 'desired_occupations', '');
+    }
+
+    public function company_information()
+    {
+        return $this->hasMany(CompanyInformation::class);
+    }
 }
