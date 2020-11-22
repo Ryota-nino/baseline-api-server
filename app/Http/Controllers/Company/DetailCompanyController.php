@@ -16,6 +16,7 @@ class DetailCompanyController extends Controller
     public function __invoke($id)
     {
         return Company::with(
+            'prefectures',
             'company_information.user',
             'company_information.occupational_category',
             'company_information.company_comments',
