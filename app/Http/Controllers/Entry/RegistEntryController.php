@@ -33,7 +33,7 @@ class RegistEntryController extends Controller
         foreach($request->items as $item){
             $entry = new Entry();
             $entry->fill($item);
-            $entry->company_information_id = $user->id;
+            $entry->company_information_id = $company_info->id;
             
             if(!$entry->save()){
                 $status = 400;
