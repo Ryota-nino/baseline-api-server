@@ -11,6 +11,8 @@ use App\Http\Controllers\Draft\IndexDraftController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\MyPageController;
 use App\Http\Controllers\User\ShowUserController;
+use App\Http\Controllers\Draft\DeleteDraftController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,5 +55,5 @@ Route::prefix('company')->group(function () {
 
 Route::prefix('draft')->group(function () {
     Route::get('/', IndexDraftController::class);
+    Route::post('/delete/{id}', DeleteDraftController::class);
 });
-
