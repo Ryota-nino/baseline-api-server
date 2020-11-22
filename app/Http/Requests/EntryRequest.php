@@ -24,7 +24,6 @@ class EntryRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|integer',
             'company_id' => 'required|integer',
             'internship_id' => 'required|integer',
             'occupational_category_id' => 'required|integer',

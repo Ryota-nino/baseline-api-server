@@ -43,9 +43,8 @@ Route::prefix('company')->group(function () {
 });
 
 Route::prefix('entry')->group(function () {
-    Route::post('/', RegistEntryController::class);
+    Route::middleware('auth:sanctum')->post('/', RegistEntryController::class);
 });
 
 Route::get('/home', HomeController::class);
-
 

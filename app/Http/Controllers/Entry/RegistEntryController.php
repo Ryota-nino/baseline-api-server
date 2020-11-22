@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Entry;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EntryRequest;
 use App\Models\CompanyInformation;
@@ -17,11 +18,13 @@ class RegistEntryController extends Controller
      */
     public function __invoke(EntryRequest $request)
     {
+        $user = Auth::user();
         $company_info = new CompanyInformation();
         $status = 200;
         $message1 = 'Company_Information table is OK';
         $message2 = 'Entry table is OK';
 
+        $company_info->user_id = $user->id;
         if (!$company_info->fill($request->all())->save()) {
             $status = 400;
             $message1 = 'Company_Information table is Bad Request';
@@ -30,7 +33,7 @@ class RegistEntryController extends Controller
         foreach($request->items as $item){
             $entry = new Entry();
             $entry->fill($item);
-            $entry->company_information_id = $company_info->id;
+            $entry->company_information_id = $user->id;
             
             if(!$entry->save()){
                 $status = 400;
