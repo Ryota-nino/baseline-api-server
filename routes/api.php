@@ -8,6 +8,7 @@ use App\Http\Controllers\Company\RegistCompanyController;
 use App\Http\Controllers\Company\SearchCompanyController;
 use App\Http\Controllers\Company\ShowCompanyController;
 use App\Http\Controllers\Draft\IndexDraftController;
+use App\Http\Controllers\Entry\RegistEntryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\MyPageController;
 use App\Http\Controllers\User\ShowUserController;
@@ -56,4 +57,8 @@ Route::prefix('company')->group(function () {
 Route::prefix('draft')->group(function () {
     Route::get('/', IndexDraftController::class);
     Route::post('/delete/{id}', DeleteDraftController::class);
+});
+
+Route::prefix('entry')->group(function () {
+    Route::middleware('auth:sanctum')->post('/', RegistEntryController::class);
 });

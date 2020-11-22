@@ -9,7 +9,12 @@ class CompanyInformation extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'user_id',
+        'company_id',
+        'internship_id',
+        'occupational_category_id',
+    ];
 
     public function selections()
     {
@@ -40,4 +45,5 @@ class CompanyInformation extends Model
     {
         return $this->hasOne(OccupationalCategory::class, 'id', 'occupational_category_id');
     }
+
 }
