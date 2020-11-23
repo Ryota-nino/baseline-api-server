@@ -25,6 +25,12 @@ class SearchUserController extends Controller
         // 古い順
         $older = $request->query('older');
 
+        //TODO 卒業年次検索
+        $year_of_graduation = $request->query('year_of_graduation');
+
+        // 卒業フラグ
+        $graduation = $request->query('graduation') != NULL ? $request->query('graduation') : true;
+
         $users = User::query()->where('privilege', '=', '0');
 
         // 希望職種からor検索
@@ -36,11 +42,17 @@ class SearchUserController extends Controller
         if ($free_word) {
             //TODO フルネームで検索するように変更
             $users->where(function ($query) use ($free_word) {
+                // 名前検索
                 $query->where('last_name', 'like', "%$free_word%")
                     ->orWhere('first_name', 'like', "%$free_word%")
                     // 学籍番号で検索
                     ->orWhere('student_number', 'like', "%$free_word%");
             });
+        }
+
+        // 卒業生のみデフォルトはTrue
+        if ($graduation) {
+            $users->where('year_of_graduation', '>', now());
         }
 
         // 最新順にする処理
@@ -49,6 +61,6 @@ class SearchUserController extends Controller
             $users->orderBy('year_of_graduation', 'desc');
         }
 
-        return $users->paginate(6);
+        return $users->paginate(16);
     }
 }
