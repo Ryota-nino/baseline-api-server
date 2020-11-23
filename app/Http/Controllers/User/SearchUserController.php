@@ -31,7 +31,7 @@ class SearchUserController extends Controller
         // 卒業フラグ
         $graduation = $request->query('graduation') != NULL ? $request->query('graduation') : true;
 
-        $users = User::query()->where('privilege', '=', '0');
+        $users = User::with('desired_occupation')->where('privilege', '=', '0');
 
         // 希望職種からor検索
         if ($desired_occupations_id) {
