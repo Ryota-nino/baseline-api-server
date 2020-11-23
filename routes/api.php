@@ -10,6 +10,7 @@ use App\Http\Controllers\Company\ShowCompanyController;
 use App\Http\Controllers\Draft\IndexDraftController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\MyPageController;
+use App\Http\Controllers\User\SearchUserController;
 use App\Http\Controllers\User\ShowUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,12 +36,16 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('auth')->group(function () {
     Route::post('/login', [AuthController::class, 'login']); // ログイン
     Route::post('/logout', [AuthController::class, 'logout']); // ログアウト
-    Route::middleware('auth:sanctum')->get('/user', ShowUserController::class);
+    Route::middleware('auth:sanctum')->get('/', ShowUserController::class);
 });
 
 Route::get('/home', HomeController::class);
 Route::get('/mypage', MyPageController::class);
 Route::get('/mypage/{id}', MyPageController::class);
+
+Route::prefix('user')->group(function () {
+    Route::get('/search', SearchUserController::class);
+});
 
 Route::prefix('company')->group(function () {
     Route::post('/', RegistCompanyController::class);
