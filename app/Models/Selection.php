@@ -9,7 +9,13 @@ class Selection extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'content'];
-
+    protected $fillable = [
+        'step',
+        'title',
+        'content',
+        'interview_date',
+    ];
+    
     public $timestamps = false;
+    
 }
