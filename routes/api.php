@@ -11,6 +11,7 @@ use App\Http\Controllers\Draft\DeleteDraftController;
 use App\Http\Controllers\Draft\IndexDraftController;
 use App\Http\Controllers\Entry\RegistEntryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OccupationalCategory\IndexOccupationalCategoryController;
 use App\Http\Controllers\User\MyPageController;
 use App\Http\Controllers\User\SearchUserController;
 use App\Http\Controllers\User\ShowUserController;
@@ -65,4 +66,8 @@ Route::prefix('draft')->group(function () {
 
 Route::prefix('entry')->group(function () {
     Route::middleware('auth:sanctum')->post('/', RegistEntryController::class);
+});
+
+Route::prefix('occupational_category')->group(function () {
+    Route::get('/', IndexOccupationalCategoryController::class);
 });
