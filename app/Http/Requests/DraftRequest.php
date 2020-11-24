@@ -25,7 +25,6 @@ class DraftRequest extends FormRequest
     {
         return [
             'content' => 'required',
-            'posted_by' => 'required|integer'
         ];
     }
 }
