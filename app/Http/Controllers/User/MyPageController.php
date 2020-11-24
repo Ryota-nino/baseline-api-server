@@ -23,6 +23,7 @@ class MyPageController extends Controller
         }
 
         return User::with(
+            'desired_occupation',
             'company_information.occupational_category',
             'company_information.company_comments',
             'company_information.selections',
