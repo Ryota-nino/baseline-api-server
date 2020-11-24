@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Draft;
 use App\Http\Controllers\Controller;
 use App\Models\Draft;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IndexDraftController extends Controller
 {
@@ -16,7 +17,9 @@ class IndexDraftController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $draft = Draft::where('posted_by',$request->posted_by)->get();
+        $user = Auth::user();
+
+        $draft = Draft::where('posted_by', $user->id)->get();
 
         return response()->json(
             $draft
