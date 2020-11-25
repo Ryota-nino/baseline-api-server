@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'student_number' => 1000000,
             'first_name' => 'アドミン',
             'last_name' => 'ララベル',
-            'sex' => 3,
+            'sex' => 2,
             'annual' => 4,
             'year_of_graduation' => Carbon::parse('2021/04/01'),
             'icon_image_path' => 'storage/example_user_icon.jpg',
