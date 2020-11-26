@@ -10,6 +10,7 @@ use App\Http\Controllers\Company\ShowCompanyController;
 use App\Http\Controllers\Draft\DeleteDraftController;
 use App\Http\Controllers\Draft\IndexDraftController;
 use App\Http\Controllers\Entry\RegistEntryController;
+use App\Http\Controllers\Entry\DeleteEntryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OccupationalCategory\IndexOccupationalCategoryController;
 use App\Http\Controllers\User\MyPageController;
@@ -69,6 +70,7 @@ Route::prefix('draft')->group(function () {
 
 Route::prefix('entry')->group(function () {
     Route::middleware('auth:sanctum')->post('/', RegistEntryController::class);
+    Route::post('/delete/{id}', DeleteEntryController::class);
 });
 
 Route::prefix('occupational_category')->group(function () {
