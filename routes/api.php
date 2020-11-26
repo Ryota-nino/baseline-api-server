@@ -13,6 +13,7 @@ use App\Http\Controllers\Entry\RegistEntryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OccupationalCategory\IndexOccupationalCategoryController;
 use App\Http\Controllers\User\MyPageController;
+use App\Http\Controllers\User\RegistUserController;
 use App\Http\Controllers\User\SearchUserController;
 use App\Http\Controllers\User\ShowUserController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,7 @@ Route::get('/mypage', MyPageController::class);
 Route::get('/mypage/{id}', MyPageController::class);
 
 Route::prefix('user')->group(function () {
+    Route::post('/', RegistUserController::class);
     Route::get('/search', SearchUserController::class);
 });
 

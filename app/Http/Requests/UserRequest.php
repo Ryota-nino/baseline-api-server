@@ -13,7 +13,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,13 +24,15 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'student_number' => 'required|integer|digits:7',
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
-            'sex' => 'required|integer|between:0,2', // 0:男, 1:女, 2:その他
-            'annual' => 'required|integer|min:1',
-            'year_of_graduation' => 'required|date',
-            'desired_occupations' => 'required|exists:occupational_categories.id',
+//            'student_number' => 'required|integer|digits:7',
+//            'first_name' => 'required|string',
+//            'last_name' => 'required|string',
+//            'sex' => 'required|integer|between:0,2', // 0:男, 1:女, 2:その他
+//            'annual' => 'required|integer|min:1',
+//            'year_of_graduation' => 'required|date',
+//            'desired_occupations' => 'required|exists:occupational_categories,id',
+            'email' => 'required|email',
+//            'password' => 'required'
         ];
     }
 }
