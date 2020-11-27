@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Entry;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Entry;
+use App\Models\CompanyInformation;
+use App\Models\Selection;
+use phpDocumentor\Reflection\Types\Null_;
 
 class ShowEntryController extends Controller
 {
@@ -16,11 +17,12 @@ class ShowEntryController extends Controller
      */
     public function __invoke($id)
     {
-        //ToDo validate
-
         $status = 200;
+        $entry = CompanyInformation::with('selections')->findOrFail($id);
 
-        $entry = Entry::where('company_information_id',$id)->get();
+        if($entry->selections->count() == 0){
+            abort(404);
+        }
 
         return response()->json(
             $entry, $status
