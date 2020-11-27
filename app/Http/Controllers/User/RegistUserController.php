@@ -71,7 +71,7 @@ class RegistUserController extends Controller
 
 
         return response()->json([
-            'message' => $user
+            'message' => $message
         ], $status);
     }
 }
