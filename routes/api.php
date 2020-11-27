@@ -16,6 +16,7 @@ use App\Http\Controllers\User\MyPageController;
 use App\Http\Controllers\User\SearchUserController;
 use App\Http\Controllers\User\ShowUserController;
 use App\Http\Controllers\Draft\RegistDraftController;
+use App\Http\Controllers\Selection\RegistSelectionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -73,4 +74,8 @@ Route::prefix('entry')->group(function () {
 
 Route::prefix('occupational_category')->group(function () {
     Route::get('/', IndexOccupationalCategoryController::class);
+});
+
+Route::prefix('selection')->group(function () {
+    Route::post('/', RegistSelectionController::class);
 });
