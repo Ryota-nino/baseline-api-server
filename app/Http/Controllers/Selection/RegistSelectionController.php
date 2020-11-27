@@ -26,7 +26,7 @@ class RegistSelectionController extends Controller
         $company_info = new CompanyInformation();
         $status = 200;
         $message1 = 'Company_Information table is OK';
-        $message2 = 'Entry table is OK';
+        $message2 = 'Selection table is OK';
 
         $company_info->user_id = $user->id;
         if (!$company_info->fill($request->all())->save()) {
@@ -42,7 +42,7 @@ class RegistSelectionController extends Controller
             $step+=1;
             if(!$selection->save()){
                 $status = 400;
-                $message2 = 'Entry table is Bad Request';
+                $message2 = 'Selection table is Bad Request';
             }
         }
 
