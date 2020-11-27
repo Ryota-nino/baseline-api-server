@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Entry;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyInformation;
-use App\Models\Selection;
-use phpDocumentor\Reflection\Types\Null_;
 
 class ShowEntryController extends Controller
 {
