@@ -15,11 +15,10 @@ class InterviewContentsTable extends Migration
     {
         Schema::create('interview_contents', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('interview_id')
-                ->unsigned();
+            $table->bigInteger('interview_id')->unsigned();
             $table->text('content');
 
-            $table->foreign('interview_id')->references('id')->on('interviews')->cascadeOnDelete();
+            $table->foreign('interview_id')->references('id')->on('interviews')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 

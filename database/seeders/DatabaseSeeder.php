@@ -11,6 +11,7 @@ use App\Models\Entry;
 use App\Models\MyActivity;
 use App\Models\Selection;
 use App\Models\User;
+use Carbon\Carbon;
 use Faker\Factory as FakerFactory;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Seeder;
@@ -31,8 +32,9 @@ class DatabaseSeeder extends Seeder
             'student_number' => 1000000,
             'first_name' => 'アドミン',
             'last_name' => 'ララベル',
-            'sex' => 3,
-            'year_of_graduation' => 22,
+            'sex' => 2,
+            'annual' => 4,
+            'year_of_graduation' => Carbon::parse('2021/04/01'),
             'icon_image_path' => 'storage/example_user_icon.jpg',
             'desired_occupations' => 1,
             'privilege' => 0,
@@ -72,7 +74,7 @@ class DatabaseSeeder extends Seeder
         CompanyComment::factory(50)->create();
 
         // 投票をランダムで生成
-        Selection::factory(50)->create();
+        //Selection::factory(50)->create();
         // 面接を50件生成
         CompanyInformation::factory(50)
             ->create()
@@ -88,7 +90,6 @@ class DatabaseSeeder extends Seeder
                         'interview_date' => $faker->date()
                     ]);
 
-
                     // 面接内容を数件追加
                     for ($j = 0; $j < rand(1, 5); $j++) {
                         DB::table('interview_contents')->insert([
@@ -96,6 +97,22 @@ class DatabaseSeeder extends Seeder
                             'content' => $faker->sentence($faker->numberBetween(30, 200))
                         ]);
                     }
+                }
+            });
+        CompanyInformation::factory(50)
+            ->create()
+            ->each(function (CompanyInformation $companyInformation) {
+                $faker = FakerFactory::create();
+
+                // 面接のステップ1~5ランダム生成
+                for ($i = 0; $i < rand(1, 5); $i++) {
+                    $id = DB::table('selections')->insertGetId([
+                        'company_information_id' => $companyInformation->id,
+                        'step' => ($i + 1),
+                        'title' => $faker->text($faker->numberBetween(7, 50)),
+                        'content' => $faker->text($faker->numberBetween(30, 200)),
+                        'interview_date' => $faker->date()
+                    ]);
                 }
             });
         Entry::factory(50)->create();

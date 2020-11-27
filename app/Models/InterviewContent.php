@@ -5,17 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Selection extends Model
+class InterviewContent extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'step',
-        'title',
-        'content',
-        'interview_date',
+        'interview_id',
+        'content'
     ];
-    
-    public $timestamps = false;
-    
 }

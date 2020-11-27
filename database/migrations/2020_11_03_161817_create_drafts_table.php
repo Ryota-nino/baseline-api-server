@@ -19,7 +19,7 @@ class CreateDraftsTable extends Migration
             $table->bigInteger('posted_by')->unsigned();
             $table->timestamps();
 
-            $table->foreign('posted_by')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('posted_by')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
