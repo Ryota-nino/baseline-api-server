@@ -24,9 +24,9 @@ class SelectionRequest extends FormRequest
     public function rules()
     {
         return [
-            'company_id' => 'required|integer',
-            'internship_id' => 'required|integer',
-            'occupational_category_id' => 'required|integer',
+            'company_id' => 'required|integer|exists:companies,id',
+            'internship_id' => 'required|integer|exists:internships,id',
+            'occupational_category_id' => 'required|integer|exists:occupational_categories,id',
             'items' => 'required',
             'items.*.title' => 'required',
             'items.*.content' => 'required',
