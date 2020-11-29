@@ -9,7 +9,6 @@ use App\Models\Draft;
 use App\Models\EmploymentStatus;
 use App\Models\Entry;
 use App\Models\MyActivity;
-use App\Models\Selection;
 use App\Models\User;
 use Carbon\Carbon;
 use Faker\Factory as FakerFactory;
@@ -45,7 +44,6 @@ class DatabaseSeeder extends Seeder
 
 
         User::factory(50)->create();
-        MyActivity::factory(200)->create();
         Draft::factory(200)->create();
 
         $this->call(PrefectureTableSeeder::class);
@@ -69,6 +67,9 @@ class DatabaseSeeder extends Seeder
             } catch (QueryException $qe) {
             }
         }
+
+        // アクティビティをランダム背生成
+        MyActivity::factory(200)->create();
 
         // 企業コメントをランダムで生成
         CompanyComment::factory(50)->create();

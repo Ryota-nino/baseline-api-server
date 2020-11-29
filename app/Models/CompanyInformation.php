@@ -16,6 +16,11 @@ class CompanyInformation extends Model
         'occupational_category_id',
     ];
 
+    public function my_activities()
+    {
+        return $this->hasMany(MyActivity::class);
+    }
+
     public function selections()
     {
         return $this->hasMany(Selection::class);

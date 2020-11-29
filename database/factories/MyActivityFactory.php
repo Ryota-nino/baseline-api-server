@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\CompanyInformation;
 use App\Models\MyActivity;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -22,9 +23,9 @@ class MyActivityFactory extends Factory
     public function definition()
     {
         return [
-            'posted_by' => $this->faker->numberBetween(1, 50),
+            'company_information_id' => CompanyInformation::factory(),
             'content' => $this->faker->text($this->faker->numberBetween(30, 200)),
-            'posted_year' => $this->faker->numberBetween(1,4),
+            'posted_year' => $this->faker->numberBetween(1, 4),
         ];
     }
 }
