@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class EditUserProfileController extends Controller
 {
@@ -31,7 +32,34 @@ class EditUserProfileController extends Controller
         $status = 200;
         $message = 'OK';
 
-        if (!$user->fill($request->all())->save()) {
+        if ($request->icon) {
+            // 画像のバリデーション
+            $request->validate([
+                'logo_image' => [
+                    'regex:/data:image\/(jpg|jpeg|png);base64,/'
+                ],
+            ]);
+
+            $old_icon_path = basename($user->icon_image_path);
+
+            // 画像を保存しそのpathを返す処理
+            try {
+                $new_icon_path = StoreUserIcon::storeIcon($request->icon);
+                $user->fill(['icon_image_path' => $new_icon_path]);
+
+                // 前の画像を削除する処理
+                Storage::disk('public')->delete($old_icon_path);
+
+            } catch (Exception $e) {
+                // 画像保存が失敗したとき
+                return response()->json([
+                    'message' => 'SaveFailedError',
+                ], 400);
+
+            }
+        }
+
+        if (!$user->fill($validated_request)->save()) {
             $status = 400;
             $message = 'Bad Request';
         }
