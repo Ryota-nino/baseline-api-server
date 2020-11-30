@@ -21,6 +21,7 @@ use App\Http\Controllers\User\MyPageController;
 use App\Http\Controllers\User\RegistUserController;
 use App\Http\Controllers\User\SearchUserController;
 use App\Http\Controllers\User\ShowUserController;
+use Illuminate\Http\Request;
 use App\Http\Controllers\User\TemporaryRegistationUserController;
 use Illuminate\Support\Facades\Route;
 
