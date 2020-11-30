@@ -19,6 +19,7 @@ use App\Http\Controllers\User\SearchUserController;
 use App\Http\Controllers\User\ShowUserController;
 use App\Http\Controllers\Draft\RegistDraftController;
 use App\Http\Controllers\Selection\RegistSelectionController;
+use App\Http\Controllers\Selection\ShowSelectionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -82,4 +83,5 @@ Route::prefix('occupational_category')->group(function () {
 
 Route::prefix('selection')->group(function () {
     Route::post('/', RegistSelectionController::class);
+    Route::get('/show/{id}', ShowSelectionController::class);
 });
