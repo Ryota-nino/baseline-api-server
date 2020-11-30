@@ -42,7 +42,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'email_verify_token'
+        'email_verify_token',
+        'icon_image_path',
     ];
 
     /**
@@ -55,8 +56,14 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'graduation_flag'
+        'graduation_flag',
+        'icon_image_url'
     ];
+
+    public function getIconImageUrlAttribute()
+    {
+        return asset($this->icon_image_path);
+    }
 
     public function getGraduationFlagAttribute()
     {
