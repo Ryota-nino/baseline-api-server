@@ -16,12 +16,12 @@ use App\Http\Controllers\Entry\ShowEntryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OccupationalCategory\IndexOccupationalCategoryController;
 use App\Http\Controllers\Selection\RegistSelectionController;
+use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\EditUserProfileController;
 use App\Http\Controllers\User\MyPageController;
 use App\Http\Controllers\User\RegistUserController;
 use App\Http\Controllers\User\SearchUserController;
 use App\Http\Controllers\User\ShowUserController;
-use Illuminate\Http\Request;
 use App\Http\Controllers\User\TemporaryRegistationUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,6 +56,7 @@ Route::get('/mypage/{id}', MyPageController::class);
 
 Route::prefix('user')->group(function () {
     Route::post('/', TemporaryRegistationUserController::class);
+    Route::post('/delete/{id}', DeleteUserController::class);
     Route::post('/register', RegistUserController::class);
     Route::get('/search', SearchUserController::class);
     Route::post('/edit/{id}', EditUserProfileController::class);
