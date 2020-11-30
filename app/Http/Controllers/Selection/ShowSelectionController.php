@@ -16,14 +16,14 @@ class ShowSelectionController extends Controller
     public function __invoke($id)
     {
         $status = 200;
-        $entry = CompanyInformation::with('selections')->findOrFail($id);
+        $selection = CompanyInformation::with('selections')->findOrFail($id);
 
-        if($entry->selections->count() == 0){
+        if($selection->selections->count() == 0){
             abort(404);
         }
 
         return response()->json(
-            $entry, $status
+            $selection, $status
         );
     }
 }
