@@ -13,6 +13,7 @@ use App\Http\Controllers\Draft\RegistDraftController;
 use App\Http\Controllers\Entry\DeleteEntryController;
 use App\Http\Controllers\Entry\RegistEntryController;
 use App\Http\Controllers\Entry\ShowEntryController;
+use App\Http\Controllers\Entry\EditEntryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OccupationalCategory\IndexOccupationalCategoryController;
 use App\Http\Controllers\Selection\RegistSelectionController;
@@ -79,6 +80,7 @@ Route::prefix('draft')->group(function () {
 Route::prefix('entry')->group(function () {
     Route::middleware('auth:sanctum')->post('/', RegistEntryController::class);
     Route::post('/delete/{id}', DeleteEntryController::class);
+    Route::post('/edit/{id}', EditEntryController::class);
     Route::get('/show/{id}', ShowEntryController::class);
 });
 
