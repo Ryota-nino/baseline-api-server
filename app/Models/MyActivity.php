@@ -14,8 +14,10 @@ class MyActivity extends Model
         'posted_year'
     ];
 
-    public function users()
+    public $timestamps = false;
+
+    public function compony_informations()
     {
-        return $this->belongsTo(User::class, 'posted_by');
+        return $this->hasMany(CompanyInformation::class, 'id');
     }
 }
