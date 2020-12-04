@@ -14,6 +14,7 @@ use App\Http\Controllers\Entry\DeleteEntryController;
 use App\Http\Controllers\Entry\RegistEntryController;
 use App\Http\Controllers\Entry\ShowEntryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MyActivity\RegisterMyActivity;
 use App\Http\Controllers\OccupationalCategory\IndexOccupationalCategoryController;
 use App\Http\Controllers\Selection\RegistSelectionController;
 use App\Http\Controllers\User\DeleteUserController;
@@ -90,3 +91,9 @@ Route::prefix('occupational_category')->group(function () {
 Route::prefix('selection')->group(function () {
     Route::post('/', RegistSelectionController::class);
 });
+
+Route::prefix('my_activity')
+    ->middleware('auth:sanctum')
+    ->group(function () {
+        Route::post('/', RegisterMyActivity::class);
+    });

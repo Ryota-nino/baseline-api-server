@@ -18,7 +18,7 @@ class CompanyInformation extends Model
 
     public function my_activities()
     {
-        return $this->hasMany(MyActivity::class);
+        return $this->hasMany(MyActivity::class, 'company_information_id');
     }
 
     public function selections()
