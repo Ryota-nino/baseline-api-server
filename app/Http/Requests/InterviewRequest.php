@@ -28,7 +28,7 @@ class InterviewRequest extends FormRequest
             'internship_id' => 'required|integer',
             'occupational_category_id' => 'required|integer',
             'items' => 'required',
-            'items.*.results' => 'required|integer|between:0,1',
+            'items.*.results' => 'required|integer|boolean',
             'items.*.interview_date' => 'required|date',
             'items.*.contents' => 'required',
         ];
