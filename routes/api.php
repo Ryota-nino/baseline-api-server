@@ -8,6 +8,7 @@ use App\Http\Controllers\Company\RegistCompanyController;
 use App\Http\Controllers\Company\SearchCompanyController;
 use App\Http\Controllers\Company\ShowCompanyController;
 use App\Http\Controllers\CompanyInformation\DeleteCompanyInformation;
+use App\Http\Controllers\Draft\DeleteDraftController;
 use App\Http\Controllers\Draft\IndexDraftController;
 use App\Http\Controllers\Draft\RegistDraftController;
 use App\Http\Controllers\Entry\RegistEntryController;
@@ -77,6 +78,7 @@ Route::prefix('company')->group(function () {
 Route::prefix('draft')->group(function () {
     Route::get('/', IndexDraftController::class);
     Route::post('/', RegistDraftController::class);
+    Route::post('/delete/{id}', DeleteDraftController::class);
 });
 
 Route::prefix('entry')->group(function () {
