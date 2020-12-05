@@ -22,14 +22,20 @@ class MyPageController extends Controller
             $id = Auth::user()->id;
         }
 
-        return User::with(
-            'desired_occupation',
-            'company_information.my_activities',
-            'company_information.occupational_category',
-            'company_information.company_comments',
-            'company_information.selections',
-            'company_information.entries',
-            'company_information.interviews.interview_contents'
-        )->findOrFail($id);
+        return User::query()
+            ->with(
+                'desired_occupation',
+                'company_information.my_activities',
+                'company_information.occupational_category',
+                'company_information.company_comments',
+                'company_information.selections',
+                'company_information.entries',
+                'company_information.interviews.interview_contents'
+            )
+            // 登録順にソート
+            ->with(['company_information' => function ($query) {
+                $query->orderBy('id', 'desc');
+            }])
+            ->findOrFail($id);
     }
 }
