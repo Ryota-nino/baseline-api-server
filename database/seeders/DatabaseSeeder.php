@@ -9,7 +9,6 @@ use App\Models\Draft;
 use App\Models\EmploymentStatus;
 use App\Models\Entry;
 use App\Models\MyActivity;
-use App\Models\Selection;
 use App\Models\User;
 use Carbon\Carbon;
 use Faker\Factory as FakerFactory;
@@ -45,7 +44,6 @@ class DatabaseSeeder extends Seeder
 
 
         User::factory(50)->create();
-        MyActivity::factory(200)->create();
         Draft::factory(200)->create();
 
         $this->call(PrefectureTableSeeder::class);
@@ -69,6 +67,9 @@ class DatabaseSeeder extends Seeder
             } catch (QueryException $qe) {
             }
         }
+
+        // アクティビティをランダム背生成
+        MyActivity::factory(200)->create();
 
         // 企業コメントをランダムで生成
         CompanyComment::factory(50)->create();
@@ -103,17 +104,12 @@ class DatabaseSeeder extends Seeder
             ->create()
             ->each(function (CompanyInformation $companyInformation) {
                 $faker = FakerFactory::create();
-
-                // 面接のステップ1~5ランダム生成
-                for ($i = 0; $i < rand(1, 5); $i++) {
-                    $id = DB::table('selections')->insertGetId([
-                        'company_information_id' => $companyInformation->id,
-                        'step' => ($i + 1),
-                        'title' => $faker->text($faker->numberBetween(7, 50)),
-                        'content' => $faker->text($faker->numberBetween(30, 200)),
-                        'interview_date' => $faker->date()
-                    ]);
-                }
+                $id = DB::table('selections')->insertGetId([
+                    'company_information_id' => $companyInformation->id,
+                    'title' => $faker->text($faker->numberBetween(7, 50)),
+                    'content' => $faker->text($faker->numberBetween(30, 200)),                        
+                    'interview_date' => $faker->date()
+                ]);
             });
         Entry::factory(50)->create();
     }

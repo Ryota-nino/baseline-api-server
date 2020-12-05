@@ -10,7 +10,6 @@ class Selection extends Model
     use HasFactory;
 
     protected $fillable = [
-        'step',
         'title',
         'content',
         'interview_date',

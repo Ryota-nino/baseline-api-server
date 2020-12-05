@@ -9,18 +9,22 @@ use App\Http\Controllers\Company\SearchCompanyController;
 use App\Http\Controllers\Company\ShowCompanyController;
 use App\Http\Controllers\Draft\DeleteDraftController;
 use App\Http\Controllers\Draft\IndexDraftController;
-use App\Http\Controllers\Entry\RegistEntryController;
+use App\Http\Controllers\Draft\RegistDraftController;
 use App\Http\Controllers\Entry\DeleteEntryController;
+use App\Http\Controllers\Entry\RegistEntryController;
 use App\Http\Controllers\Entry\ShowEntryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OccupationalCategory\IndexOccupationalCategoryController;
+use App\Http\Controllers\Selection\RegistSelectionController;
+use App\Http\Controllers\Selection\EditSelectionController;
+use App\Http\Controllers\User\DeleteUserController;
+use App\Http\Controllers\User\EditUserProfileController;
 use App\Http\Controllers\User\MyPageController;
+use App\Http\Controllers\User\RegistUserController;
 use App\Http\Controllers\User\SearchUserController;
 use App\Http\Controllers\User\ShowUserController;
-use App\Http\Controllers\Draft\RegistDraftController;
-use App\Http\Controllers\Selection\RegistSelectionController;
 use App\Http\Controllers\Selection\ShowSelectionController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\User\TemporaryRegistationUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,7 +57,11 @@ Route::get('/mypage', MyPageController::class);
 Route::get('/mypage/{id}', MyPageController::class);
 
 Route::prefix('user')->group(function () {
+    Route::post('/', TemporaryRegistationUserController::class);
+    Route::post('/delete/{id}', DeleteUserController::class);
+    Route::post('/register', RegistUserController::class);
     Route::get('/search', SearchUserController::class);
+    Route::post('/edit/{id}', EditUserProfileController::class);
 });
 
 Route::prefix('company')->group(function () {
@@ -84,4 +92,5 @@ Route::prefix('occupational_category')->group(function () {
 Route::prefix('selection')->group(function () {
     Route::post('/', RegistSelectionController::class);
     Route::get('/show/{id}', ShowSelectionController::class);
+    Route::post('/edit/{id}', EditSelectionController::class);
 });
