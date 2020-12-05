@@ -27,6 +27,7 @@ use App\Http\Controllers\User\MyPageController;
 use App\Http\Controllers\User\RegistUserController;
 use App\Http\Controllers\User\SearchUserController;
 use App\Http\Controllers\User\ShowUserController;
+use App\Http\Controllers\Selection\ShowSelectionController;
 use App\Http\Controllers\User\TemporaryRegistationUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -94,6 +95,7 @@ Route::prefix('occupational_category')->group(function () {
 
 Route::prefix('selection')->group(function () {
     Route::post('/', RegistSelectionController::class);
+    Route::get('/show/{id}', ShowSelectionController::class);
     Route::post('/edit/{id}', EditSelectionController::class);
 });
 
