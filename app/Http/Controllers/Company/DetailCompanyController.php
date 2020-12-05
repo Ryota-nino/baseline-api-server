@@ -15,14 +15,20 @@ class DetailCompanyController extends Controller
      */
     public function __invoke($id)
     {
-        return Company::with(
-            'prefectures',
-            'company_information.user',
-            'company_information.occupational_category',
-            'company_information.company_comments',
-            'company_information.selections',
-            'company_information.entries',
-            'company_information.interviews.interview_contents'
-        )->findOrFail($id);
+        return Company::query()
+            ->with(
+                'prefectures',
+                'company_information.user',
+                'company_information.occupational_category',
+                'company_information.company_comments',
+                'company_information.selections',
+                'company_information.entries',
+                'company_information.interviews.interview_contents'
+            )
+            // 登録順にソート
+            ->with(['company_information' => function ($query) {
+                $query->orderBy('id', 'desc');
+            }])
+            ->findOrFail($id);
     }
 }
