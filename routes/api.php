@@ -13,6 +13,7 @@ use App\Http\Controllers\Draft\IndexDraftController;
 use App\Http\Controllers\Draft\RegistDraftController;
 use App\Http\Controllers\Entry\RegistEntryController;
 use App\Http\Controllers\Entry\ShowEntryController;
+use App\Http\Controllers\Entry\EditEntryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyActivity\EditMyActivity;
 use App\Http\Controllers\MyActivity\RegisterMyActivity;
@@ -83,6 +84,7 @@ Route::prefix('draft')->group(function () {
 
 Route::prefix('entry')->group(function () {
     Route::middleware('auth:sanctum')->post('/', RegistEntryController::class);
+    Route::post('/edit/{id}', EditEntryController::class);
     Route::get('/show/{id}', ShowEntryController::class);
 });
 

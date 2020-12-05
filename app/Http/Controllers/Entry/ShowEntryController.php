@@ -16,9 +16,9 @@ class ShowEntryController extends Controller
     public function __invoke($id)
     {
         $status = 200;
-        $entry = CompanyInformation::with('selections')->findOrFail($id);
+        $entry = CompanyInformation::with('entries')->findOrFail($id);
 
-        if($entry->selections->count() == 0){
+        if($entry->entries->count() == 0){
             abort(404);
         }
 
