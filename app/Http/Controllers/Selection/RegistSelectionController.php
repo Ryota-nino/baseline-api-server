@@ -47,7 +47,7 @@ class RegistSelectionController extends Controller
         }
 
          return response()->json([
-             'message' => [
+            'message' => [
                 $message1,
                 $message2
             ]
