@@ -18,9 +18,11 @@ class EditMyActivity extends Controller
     {
         $my_activities = CompanyInformation::query()
             ->FindOrFail($id)
-            ->first()
-            ->my_activities
-            ->first();
+            ->my_activities->first();
+
+        if ($my_activities->count() <= 0) {
+            abort(404);
+        }
 
         $my_activities->fill($request->all())->update();
 
