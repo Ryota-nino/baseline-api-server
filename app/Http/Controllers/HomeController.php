@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
-use App\Models\MyActivity;
+use App\Models\CompanyInformation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,8 +23,14 @@ class HomeController extends Controller
         $user = Auth::user();
 
         // アクティビティを取得し投稿者を表示
-        $my_activities = MyActivity::with('users')->where("posted_by", "like", $user->id)->orderBy('created_at', 'desc')->limit(2)->get();;
-        $other_activities = MyActivity::with('users')->where("posted_by", "not like", $user->id)->orderBy('created_at', 'desc')->limit(3)->get();
+        $my_activities = CompanyInformation::query()->with(['my_activities', 'user'])->where('user_id', 'like', $user->id)->limit(2)->get();
+        $other_activities = CompanyInformation::query()->with('my_activities', 'user')->where('user_id', 'not like', $user->id)->limit(3)->get();
+//        $my_activities = MyActivity::query()->with('compony_informations.user.desired_occupation', function($query) use ($user) {
+//            return $query->where('id', 'like', $user->id);
+//        })->limit(2)->get();
+//        $other_activities = MyActivity::query()->with('compony_informations.user.desired_occupation', function($query) use($user) {
+//            return $query->where('id', 'not like', $user->id);
+//        })->limit(2)->get();
 
         return response()->json([
             "companies" => $companies,
