@@ -8,7 +8,6 @@ use App\Http\Requests\InterviewRequest;
 use App\Models\CompanyInformation;
 use App\Models\Interview;
 use App\Models\InterviewContent;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class RegistInterviewController extends Controller
@@ -36,21 +35,20 @@ class RegistInterviewController extends Controller
                 $interview->fill($item);
                 $interview->company_information_id = $company_info->id;
                 $interview->step = $step;
-
                 $interview->save();
 
                 foreach ($item['contents'] as $content) {
                     $interview_content = new InterviewContent();
                     $interview_content->content = $content;
                     $interview_content->interview_id = $interview->id;
-
                     $interview_content->save();
                 }
                 $step++;
-                return response()->json([
-                    'message' => 'OK'
-                ], $status,);
-            }  
+            } 
+            DB::commit();
+            return response()->json([
+                'message' => 'OK'
+            ], $status,);
         } catch (\Exception $e) {
             DB::rollBack();
             $status = 400;
