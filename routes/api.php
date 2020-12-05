@@ -14,6 +14,7 @@ use App\Http\Controllers\Entry\DeleteEntryController;
 use App\Http\Controllers\Entry\RegistEntryController;
 use App\Http\Controllers\Entry\ShowEntryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MyActivity\EditMyActivity;
 use App\Http\Controllers\MyActivity\RegisterMyActivity;
 use App\Http\Controllers\MyActivity\ShowMyActivity;
 use App\Http\Controllers\OccupationalCategory\IndexOccupationalCategoryController;
@@ -100,4 +101,5 @@ Route::prefix('my_activity')
     ->group(function () {
         Route::post('/', RegisterMyActivity::class);
         Route::get('/show/{id}', ShowMyActivity::class);
+        Route::post('/edit/{id}', EditMyActivity::class);
     });
