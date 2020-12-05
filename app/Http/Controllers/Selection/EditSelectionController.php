@@ -35,7 +35,6 @@ class EditSelectionController extends Controller
                 $selection->company_information_id = $id;
                 $selection->save();
             }
-            // throw new \Exception("エラー");
             DB::commit();
         }catch (\Exception $e){
             DB::rollback();
@@ -43,10 +42,6 @@ class EditSelectionController extends Controller
 
         return response()->json([
             'message' => 'OK',
-            'data' => [
-                $company_info,
-                //$selection
-            ],
         ], $status);
     }
 }
