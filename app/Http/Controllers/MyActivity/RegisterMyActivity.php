@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MyActivityRequest;
 use App\Models\CompanyInformation;
 use App\Models\MyActivity;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterMyActivity extends Controller
 {
@@ -40,8 +40,7 @@ class RegisterMyActivity extends Controller
         }
 
 
-        return response()->json([
-            $message
-        ], $status);
+        return response()->json(
+            $message, $status);
     }
 }
