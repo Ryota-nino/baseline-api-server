@@ -38,8 +38,6 @@ class RegistSelectionController extends Controller
             $selection = new Selection();
             $selection->fill($item);
             $selection->company_information_id = $company_info->id;
-            //$selection->step = $step;
-            //$step+=1;
             if(!$selection->save()){
                 $status = 400;
                 $message2 = 'Selection table is Bad Request';
