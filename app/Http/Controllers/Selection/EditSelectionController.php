@@ -20,6 +20,10 @@ class EditSelectionController extends Controller
     public function __invoke($id, EditSelectionRequest $request)
     {
         $company_info = CompanyInformation::query()->findOrFail($id);
+        $selection = CompanyInformation::with('selections')->findOrFail($id);
+        if($selection->selections->count() == 0){
+            abort(404);
+        }
         $user = Auth::user();
         $status = 200;
         $company_info->user_id = $user->id;
