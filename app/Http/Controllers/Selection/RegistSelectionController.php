@@ -8,8 +8,7 @@ use App\Http\Requests\SelectionRequest;
 use App\Models\CompanyInformation;
 use App\Models\Selection;
 use Illuminate\Http\Request;
-
-
+use Illuminate\Support\Facades\DB;
 
 class RegistSelectionController extends Controller
 {
@@ -21,36 +20,31 @@ class RegistSelectionController extends Controller
      */
     public function __invoke(SelectionRequest $request)
     {
-        $step = 1;
         $user = Auth::user();
         $company_info = new CompanyInformation();
         $status = 200;
-        $message1 = 'Company_Information table is OK';
-        $message2 = 'Selection table is OK';
 
-        $company_info->user_id = $user->id;
-        if (!$company_info->fill($request->all())->save()) {
-            $status = 400;
-            $message1 = 'Company_Information table is Bad Request';
-        }
+        try{
+            DB::beginTransaction();
+            $company_info->user_id = $user->id;
+            $company_info->fill($request->all())->save();
 
-        foreach($request->items as $item){
-            $selection = new Selection();
-            $selection->fill($item);
-            $selection->company_information_id = $company_info->id;
-            $selection->step = $step;
-            $step+=1;
-            if(!$selection->save()){
-                $status = 400;
-                $message2 = 'Selection table is Bad Request';
+            foreach($request->items as $item){
+                $selection = new Selection();
+                $selection->fill($item);
+                $selection->company_information_id = $company_info->id;
+                $selection->save();
             }
+            DB::commit();
+            return response()->json([
+                'message' => 'OK'
+            ], $status,);
+        }catch(\Exception $e){
+            DB::rollBack();
+            $status = 400;
+            return response()->json([
+                'message' => $e
+            ], $status,);
         }
-
-         return response()->json([
-             'message' => [
-                $message1,
-                $message2
-            ]
-        ], $status, );
     }
 }
