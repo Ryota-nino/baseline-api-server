@@ -21,6 +21,7 @@ use App\Http\Controllers\MyActivity\ShowMyActivity;
 use App\Http\Controllers\OccupationalCategory\IndexOccupationalCategoryController;
 use App\Http\Controllers\Selection\EditSelectionController;
 use App\Http\Controllers\Selection\RegistSelectionController;
+use App\Http\Controllers\Interview\ShowInterviewController;
 use App\Http\Controllers\Selection\ShowSelectionController;
 use App\Http\Controllers\Interview\EditInterviewController;
 use App\Http\Controllers\User\DeleteUserController;
@@ -103,6 +104,7 @@ Route::prefix('selection')->group(function () {
 });
 
 Route::prefix('interview')->group(function () {
+    Route::get('/show/{id}', ShowInterviewController::class);
     Route::post('/edit/{id}', EditInterviewController::class);
 });
 
