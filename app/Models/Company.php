@@ -35,4 +35,9 @@ class Company extends Model
     {
         return $this->hasMany(CompanyInformation::class);
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'employment_statuses')->withTimestamps();
+    }
 }

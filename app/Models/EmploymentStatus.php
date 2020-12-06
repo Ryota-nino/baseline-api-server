@@ -10,8 +10,9 @@ class EmploymentStatus extends Model
     use HasFactory;
 
     protected $fillable = [
+        'company_id',
         'official_offer',
         'decision_offer',
-        'job_title',
+        'occupatioal_category_id',
     ];
 }

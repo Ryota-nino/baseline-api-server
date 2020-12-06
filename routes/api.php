@@ -22,6 +22,7 @@ use App\Http\Controllers\OccupationalCategory\IndexOccupationalCategoryControlle
 use App\Http\Controllers\Selection\EditSelectionController;
 use App\Http\Controllers\Selection\RegistSelectionController;
 use App\Http\Controllers\Selection\ShowSelectionController;
+use App\Http\Controllers\EmploymentStatus\EditEmploymentStatusController;
 use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\EditUserProfileController;
 use App\Http\Controllers\User\MyPageController;
@@ -99,6 +100,10 @@ Route::prefix('selection')->group(function () {
     Route::post('/', RegistSelectionController::class);
     Route::get('/show/{id}', ShowSelectionController::class);
     Route::post('/edit/{id}', EditSelectionController::class);
+});
+
+Route::prefix('employmentstatus')->group(function () {
+    Route::post('/edit', EditEmploymentStatusController::class);
 });
 
 Route::prefix('my_activity')
