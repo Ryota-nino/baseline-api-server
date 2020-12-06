@@ -11,9 +11,9 @@ use App\Http\Controllers\CompanyInformation\DeleteCompanyInformation;
 use App\Http\Controllers\Draft\DeleteDraftController;
 use App\Http\Controllers\Draft\IndexDraftController;
 use App\Http\Controllers\Draft\RegistDraftController;
+use App\Http\Controllers\Entry\EditEntryController;
 use App\Http\Controllers\Entry\RegistEntryController;
 use App\Http\Controllers\Entry\ShowEntryController;
-use App\Http\Controllers\Entry\EditEntryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyActivity\EditMyActivity;
 use App\Http\Controllers\MyActivity\RegisterMyActivity;
@@ -21,13 +21,14 @@ use App\Http\Controllers\MyActivity\ShowMyActivity;
 use App\Http\Controllers\OccupationalCategory\IndexOccupationalCategoryController;
 use App\Http\Controllers\Selection\EditSelectionController;
 use App\Http\Controllers\Selection\RegistSelectionController;
+use App\Http\Controllers\Selection\ShowSelectionController;
 use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\EditUserProfileController;
 use App\Http\Controllers\User\MyPageController;
+use App\Http\Controllers\User\PasswordChangeController;
 use App\Http\Controllers\User\RegistUserController;
 use App\Http\Controllers\User\SearchUserController;
 use App\Http\Controllers\User\ShowUserController;
-use App\Http\Controllers\Selection\ShowSelectionController;
 use App\Http\Controllers\User\TemporaryRegistationUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,7 @@ Route::prefix('auth')->group(function () {
     Route::post('/login', [AuthController::class, 'login']); // ログイン
     Route::post('/logout', [AuthController::class, 'logout']); // ログアウト
     Route::middleware('auth:sanctum')->get('/user', ShowUserController::class);
+    Route::middleware('auth:sanctum')->post('/password_change', PasswordChangeController::class);
 });
 
 Route::get('/home', HomeController::class);
