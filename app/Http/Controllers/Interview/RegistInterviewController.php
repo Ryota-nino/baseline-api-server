@@ -30,6 +30,7 @@ class RegistInterviewController extends Controller
             $company_info->user_id = $user->id;
             $company_info->fill($request->all())->save();
 
+            //interviews表にデータを登録
             foreach ($request->items as $item) {
                 $interview = new Interview();
                 $interview->fill($item);
@@ -37,6 +38,7 @@ class RegistInterviewController extends Controller
                 $interview->step = $step;
                 $interview->save();
 
+                //interview_contents表にデータを登録
                 foreach ($item['contents'] as $content) {
                     $interview_content = new InterviewContent();
                     $interview_content->content = $content;
@@ -46,9 +48,6 @@ class RegistInterviewController extends Controller
                 $step++;
             } 
             DB::commit();
-            return response()->json([
-                'message' => 'OK'
-            ], $status,);
         } catch (\Exception $e) {
             DB::rollBack();
             $status = 400;
@@ -56,6 +55,8 @@ class RegistInterviewController extends Controller
                 'message' => 'Failed to request'
             ], $status,);
         }
-        
+        return response()->json([
+            'message' => 'OK'
+        ], $status,);
     }
 }
