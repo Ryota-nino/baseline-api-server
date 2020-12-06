@@ -19,9 +19,9 @@ class EditSelectionController extends Controller
      */
     public function __invoke($id, EditSelectionRequest $request)
     {
-        $company_info = CompanyInformation::query()->findOrFail($id);
-        $selection = CompanyInformation::with('selections')->findOrFail($id);
-        if($selection->selections->count() == 0){
+        $company_info = CompanyInformation::with('selections')->findOrFail($id);
+        //selectionsテーブルと紐付けされていない企業idの場合は処理しない
+        if($company_info->selections->count() == 0){
             abort(404);
         }
         $user = Auth::user();
@@ -33,6 +33,7 @@ class EditSelectionController extends Controller
             $company_info->fill($request->all())->update();
             Selection::query()->where('company_information_id', $id)->delete();
 
+            //selectionsテーブルを更新
             foreach($request->items as $item){
                 $selection = new Selection();
                 $selection->fill($item);
@@ -40,8 +41,13 @@ class EditSelectionController extends Controller
                 $selection->save();
             }
             DB::commit();
+
         }catch (\Exception $e){
             DB::rollback();
+            $status = 400;
+            return response()->json([
+                'message' => $e
+            ], $status,);
         }
 
         return response()->json([
