@@ -28,7 +28,7 @@ class EditSelectionRequest extends FormRequest
             'occupational_category_id' => 'required|integer|exists:occupational_categories,id',
             'items' => 'required',
             'items.*.title' => 'required',
-            'items.*.content' => 'required',
+            'items.*.content' => 'string|nullable',
             'items.*.interview_date' => 'required|date',
         ];
     }
