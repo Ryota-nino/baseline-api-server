@@ -9,6 +9,7 @@ class InterviewContent extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
     protected $fillable = [
         'interview_id',
         'content'
