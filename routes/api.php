@@ -25,6 +25,7 @@ use App\Http\Controllers\Interview\ShowInterviewController;
 use App\Http\Controllers\Selection\ShowSelectionController;
 use App\Http\Controllers\Interview\EditInterviewController;
 use App\Http\Controllers\Interview\RegistInterviewController;
+use App\Http\Controllers\EmploymentStatus\ShowEmploymentStatusController;
 use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\EditUserProfileController;
 use App\Http\Controllers\User\MyPageController;
@@ -108,6 +109,10 @@ Route::prefix('interview')->group(function () {
     Route::post('/', RegistInterviewController::class);
     Route::get('/show/{id}', ShowInterviewController::class);
     Route::post('/edit/{id}', EditInterviewController::class);
+});
+
+Route::prefix('employmentstatus')->group(function () {
+    Route::get('/show/{id}', ShowEmploymentStatusController::class);
 });
 
 Route::prefix('my_activity')
