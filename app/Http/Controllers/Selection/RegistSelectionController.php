@@ -29,6 +29,7 @@ class RegistSelectionController extends Controller
             $company_info->user_id = $user->id;
             $company_info->fill($request->all())->save();
 
+            //selectionsテーブルにデータを登録
             foreach($request->items as $item){
                 $selection = new Selection();
                 $selection->fill($item);
@@ -36,9 +37,6 @@ class RegistSelectionController extends Controller
                 $selection->save();
             }
             DB::commit();
-            return response()->json([
-                'message' => 'OK'
-            ], $status,);
         }catch(\Exception $e){
             DB::rollBack();
             $status = 400;
@@ -46,5 +44,8 @@ class RegistSelectionController extends Controller
                 'message' => $e
             ], $status,);
         }
+        return response()->json([
+            'message' => 'OK'
+        ], $status,);
     }
 }
