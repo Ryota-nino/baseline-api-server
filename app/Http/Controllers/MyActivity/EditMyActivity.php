@@ -12,20 +12,23 @@ class EditMyActivity extends Controller
      * Handle the incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke($id, MyActivityRequest $request)
     {
-        $my_activities = CompanyInformation::query()
+        $my_activity = CompanyInformation::query()
             ->FindOrFail($id)
             ->my_activities->first();
 
-        if ($my_activities->count() <= 0) {
+        // MyActivityが存在しないとき404を返却
+        if (!$my_activity) {
             abort(404);
         }
 
-        $my_activities->fill($request->all())->update();
+        $my_activity->fill($request->all())->update();
 
-        return $my_activities;
+        return response()->json(
+            "OK"
+        );
     }
 }
