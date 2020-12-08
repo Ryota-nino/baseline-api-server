@@ -6,7 +6,7 @@ use App\Models\CompanyInformation;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CompanyInformationPolicy
+class PostPolicy
 {
     use HandlesAuthorization;
 
