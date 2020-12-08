@@ -28,7 +28,7 @@ class EditMyActivity extends Controller
         $my_activity->fill($request->all())->update();
 
         return response()->json(
-            "OK"
+            ["message" => "OK"]
         );
     }
 }
