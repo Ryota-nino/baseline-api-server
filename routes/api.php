@@ -90,7 +90,7 @@ Route::prefix('draft')->group(function () {
 
 Route::prefix('entry')->group(function () {
     Route::middleware('auth:sanctum')->post('/', RegistEntryController::class);
-    Route::post('/edit/{id}', EditEntryController::class)->middleware('can:update,post');
+    Route::post('/edit/{id}', EditEntryController::class);
     Route::get('/show/{id}', ShowEntryController::class);
 });
 
