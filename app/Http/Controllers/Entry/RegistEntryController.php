@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\EntryRequest;
 use App\Models\CompanyInformation;
 use App\Models\Entry;
+use Illuminate\Support\Facades\DB;
 
 class RegistEntryController extends Controller
 {
@@ -21,31 +22,29 @@ class RegistEntryController extends Controller
         $user = Auth::user();
         $company_info = new CompanyInformation();
         $status = 200;
-        $message1 = 'Company_Information table is OK';
-        $message2 = 'Entry table is OK';
 
-        $company_info->user_id = $user->id;
-        if (!$company_info->fill($request->all())->save()) {
-            $status = 400;
-            $message1 = 'Company_Information table is Bad Request';
-        }
+        try{
+            DB::beginTransaction();
+            $company_info->user_id = $user->id;
+            $company_info->fill($request->all())->save();
 
-        foreach($request->items as $item){
-            $entry = new Entry();
-            $entry->fill($item);
-            $entry->company_information_id = $company_info->id;
-            
-            if(!$entry->save()){
-                $status = 400;
-                $message2 = 'Entry table is Bad Request';
+            //entriesテーブルにデータを登録
+            foreach ($request->items as $item) {
+                $entry = new Entry();
+                $entry->fill($item);
+                $entry->company_information_id = $company_info->id;
+                $entry->save();
             }
+            DB::commit();
+        }catch(\Exception $e){
+            DB::rollBack();
+            $status = 400;
+            return response()->json([
+                'message' => $e
+            ], $status,);
         }
-
-         return response()->json([
-             'message' => [
-                $message1,
-                $message2
-            ]
+        return response()->json([
+            'message' => 'OK'
         ], $status, );
     }
 }
