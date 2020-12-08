@@ -55,7 +55,7 @@ class PostPolicy
     public function update(User $user, CompanyInformation $companyInformation)
     {
         // 投稿者本人の時編集可能
-        return $this->isUserOwn($user);
+        return $this->isUserOwn($user, $companyInformation);
     }
 
     /**

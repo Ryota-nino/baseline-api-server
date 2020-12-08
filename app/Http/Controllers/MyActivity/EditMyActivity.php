@@ -14,10 +14,9 @@ class EditMyActivity extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke($id, MyActivityRequest $request)
+    public function __invoke(CompanyInformation $companyInformation, MyActivityRequest $request)
     {
-        $my_activity = CompanyInformation::query()
-            ->FindOrFail($id)
+        $my_activity = $companyInformation
             ->my_activities->first();
 
         // MyActivityが存在しないとき404を返却

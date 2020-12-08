@@ -114,8 +114,12 @@ Route::prefix('my_activity')
     ->middleware('auth:sanctum')
     ->group(function () {
         Route::post('/', RegisterMyActivity::class);
-        Route::get('/show/{id}', ShowMyActivity::class);
-        Route::post('/edit/{id}', EditMyActivity::class);
+        Route::get('/show/{company_information}', ShowMyActivity::class)
+            // 編集権限
+            ->middleware('can:update,company_information');
+        Route::post('/edit/{company_information}', EditMyActivity::class)
+            // 編集権限
+            ->middleware('can:update,company_information');
     });
 
 Route::prefix('post')

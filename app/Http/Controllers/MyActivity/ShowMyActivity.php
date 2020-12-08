@@ -14,9 +14,9 @@ class ShowMyActivity extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke($id, Request $request)
+    public function __invoke(CompanyInformation $companyInformation, Request $request)
     {
-        $my_activities = CompanyInformation::with('my_activities')->findOrFail($id);
+        $my_activities = $companyInformation->load('my_activities');
 
         if ($my_activities->my_activities->count() == 0) {
             abort(404);
