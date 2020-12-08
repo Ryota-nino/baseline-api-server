@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\CompanyInformation;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Gate;
 
 class PostPolicy
 {
@@ -53,7 +54,8 @@ class PostPolicy
      */
     public function update(User $user, CompanyInformation $companyInformation)
     {
-        //
+        // 投稿者本人の時編集可能
+        return $this->isUserOwn($user);
     }
 
     /**
@@ -65,7 +67,11 @@ class PostPolicy
      */
     public function delete(User $user, CompanyInformation $companyInformation)
     {
-        return true;
+        // 管理者権限または投稿者本人の時削除できる
+        return (
+            Gate::allows('isAdmin') |
+            $this->isUserOwn($user, $companyInformation)
+        );
     }
 
     /**
@@ -77,7 +83,7 @@ class PostPolicy
      */
     public function restore(User $user, CompanyInformation $companyInformation)
     {
-        //
+
     }
 
     /**
@@ -90,5 +96,10 @@ class PostPolicy
     public function forceDelete(User $user, CompanyInformation $companyInformation)
     {
         //
+    }
+
+    private function isUserOwn(User $user, CompanyInformation $companyInformation)
+    {
+        return $user->id == $companyInformation->user_id;
     }
 }

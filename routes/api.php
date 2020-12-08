@@ -121,5 +121,7 @@ Route::prefix('my_activity')
 Route::prefix('post')
     ->middleware('auth:sanctum')
     ->group(function () {
-        Route::post('/delete/{company_information}', DeleteCompanyInformation::class)->middleware('can:delete,company_information');
+        Route::post('/delete/{company_information}', DeleteCompanyInformation::class)
+            // 削除権限
+            ->middleware('can:delete,company_information');
     });

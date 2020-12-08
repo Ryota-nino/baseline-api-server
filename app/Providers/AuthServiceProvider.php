@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Models\CompanyInformation;
+use App\Models\User;
 use App\Policies\PostPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('isAdmin', function (User $user) {
+            return $user->privilege == 2;
+        });
     }
 }
