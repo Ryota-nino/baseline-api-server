@@ -4,9 +4,6 @@ namespace App\Providers;
 
 use App\Models\CompanyInformation;
 use App\Policies\CompanyInformationPolicy;
-use App\Policies\PostPolicy;
-use App\Models\CompanyInformation;
-use App\Policies\CompanyInformationPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
