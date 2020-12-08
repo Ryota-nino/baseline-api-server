@@ -20,9 +20,9 @@ class EditEntryController extends Controller
      */
     public function __invoke($id, EditEntryRequest $request)
     {
-        $company_info = CompanyInformation::query()->findOrFail($id);
-        $entry = CompanyInformation::with('entries')->findOrFail($id);
-        if($entry->entries->count() == 0){
+        $company_info = CompanyInformation::with('entries')->findOrFail($id);
+        ////entriesテーブルと紐付けされていない企業idの場合は処理しない
+        if($company_info->entries->count() == 0){
             abort(404);
         }
         $user = Auth::user();
@@ -34,6 +34,7 @@ class EditEntryController extends Controller
             $company_info->fill($request->all())->update();
             Entry::query()->where('company_information_id', $id)->delete();
 
+            //entriesテーブルにデータを更新
             foreach($request->items as $item){
                 $entry = new Entry();
                 $entry->fill($item);
@@ -43,8 +44,11 @@ class EditEntryController extends Controller
             DB::commit();
         }catch (\Exception $e){
             DB::rollback();
+            $status = 400;
+            return response()->json([
+                'message' => $e,
+            ], $status);
         }
-
         return response()->json([
             'message' => 'OK',
         ], $status);
