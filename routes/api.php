@@ -15,16 +15,16 @@ use App\Http\Controllers\Entry\EditEntryController;
 use App\Http\Controllers\Entry\RegistEntryController;
 use App\Http\Controllers\Entry\ShowEntryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Interview\EditInterviewController;
+use App\Http\Controllers\Interview\RegistInterviewController;
+use App\Http\Controllers\Interview\ShowInterviewController;
 use App\Http\Controllers\MyActivity\EditMyActivity;
 use App\Http\Controllers\MyActivity\RegisterMyActivity;
 use App\Http\Controllers\MyActivity\ShowMyActivity;
 use App\Http\Controllers\OccupationalCategory\IndexOccupationalCategoryController;
 use App\Http\Controllers\Selection\EditSelectionController;
 use App\Http\Controllers\Selection\RegistSelectionController;
-use App\Http\Controllers\Interview\ShowInterviewController;
 use App\Http\Controllers\Selection\ShowSelectionController;
-use App\Http\Controllers\Interview\EditInterviewController;
-use App\Http\Controllers\Interview\RegistInterviewController;
 use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\EditUserProfileController;
 use App\Http\Controllers\User\MyPageController;
@@ -121,5 +121,5 @@ Route::prefix('my_activity')
 Route::prefix('post')
     ->middleware('auth:sanctum')
     ->group(function () {
-        Route::post('/delete/{id}', DeleteCompanyInformation::class);
+        Route::post('/delete/{company_information}', DeleteCompanyInformation::class)->middleware('can:delete,company_information');
     });

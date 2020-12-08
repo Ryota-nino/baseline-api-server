@@ -4,7 +4,6 @@ namespace App\Http\Controllers\CompanyInformation;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyInformation;
-use Illuminate\Http\Request;
 
 class DeleteCompanyInformation extends Controller
 {
@@ -14,10 +13,12 @@ class DeleteCompanyInformation extends Controller
      * @param \Illuminate\Http\Request $request
      * @return string
      */
-    public function __invoke($id, Request $request)
+    public function __invoke(CompanyInformation $companyInformation)
     {
-        CompanyInformation::query()->findOrFail($id)->delete();
+        $companyInformation->delete();
 
-        return response()->json("OK");
+        return response()->json(
+            ["message" => "OK"]
+        );
     }
 }
