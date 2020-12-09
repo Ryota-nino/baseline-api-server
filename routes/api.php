@@ -106,8 +106,12 @@ Route::prefix('selection')->group(function () {
 
 Route::prefix('interview')->group(function () {
     Route::post('/', RegistInterviewController::class);
-    Route::get('/show/{id}', ShowInterviewController::class);
-    Route::post('/edit/{id}', EditInterviewController::class);
+    Route::get('/show/{company_information}', ShowInterviewController::class)
+        // 編集権限
+        ->middleware('can:update,company_information');
+    Route::post('/edit/{company_information}', EditInterviewController::class)
+        // 編集権限
+        ->middleware('can:update,company_information');
 });
 
 Route::prefix('my_activity')

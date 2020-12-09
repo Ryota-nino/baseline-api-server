@@ -13,12 +13,12 @@ class ShowInterviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke($id)
+    public function __invoke(CompanyInformation $companyInformation)
     {
         $status = 200;
-        $interview = CompanyInformation::query()->with('interviews.interview_contents')->findOrFail($id);
+        $interview = $companyInformation->load('interviews.interview_contents');
 
-        if($interview->interviews->count() == 0){
+        if ($interview->interviews->count() == 0) {
             abort(404);
         }
 
