@@ -29,7 +29,7 @@ class InterviewRequest extends FormRequest
             'occupational_category_id' => 'required|integer',
             'items' => 'required',
             'items.*.results' => 'required|integer|boolean',
-            'items.*.interview_date' => 'required|date',
+            'items.*.interview_date' => 'required|integer',
             'items.*.contents' => 'required',
         ];
     }

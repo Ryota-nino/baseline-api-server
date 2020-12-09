@@ -88,7 +88,7 @@ class DatabaseSeeder extends Seeder
                         'company_information_id' => $companyInformation->id,
                         'step' => ($i + 1),
                         'results' => rand(0, 1),
-                        'interview_date' => $faker->date()
+                        'interview_date' => $faker->numberBetween(1, 12)
                     ]);
 
                     // 面接内容を数件追加
