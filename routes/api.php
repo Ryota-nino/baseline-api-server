@@ -15,6 +15,7 @@ use App\Http\Controllers\Entry\EditEntryController;
 use App\Http\Controllers\Entry\RegistEntryController;
 use App\Http\Controllers\Entry\ShowEntryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Internship\IndexInternships;
 use App\Http\Controllers\Interview\EditInterviewController;
 use App\Http\Controllers\Interview\RegistInterviewController;
 use App\Http\Controllers\Interview\ShowInterviewController;
@@ -140,4 +141,10 @@ Route::prefix('post')
         Route::post('/delete/{company_information}', DeleteCompanyInformation::class)
             // 削除権限
             ->middleware('can:delete,company_information');
+    });
+
+Route::prefix('internship')
+    ->middleware('auth:sanctum')
+    ->group(function () {
+        Route::get('/', IndexInternships::class);
     });
