@@ -90,8 +90,12 @@ Route::prefix('draft')->group(function () {
 
 Route::prefix('entry')->group(function () {
     Route::middleware('auth:sanctum')->post('/', RegistEntryController::class);
-    Route::post('/edit/{id}', EditEntryController::class);
-    Route::get('/show/{id}', ShowEntryController::class);
+    Route::post('/edit/{company_information}', EditEntryController::class)
+        // 編集権限
+        ->middleware('can:update,company_information');
+    Route::get('/show/{company_information}', ShowEntryController::class)
+        // 編集権限
+        ->middleware('can:update,company_information');
 });
 
 Route::prefix('occupational_category')->group(function () {

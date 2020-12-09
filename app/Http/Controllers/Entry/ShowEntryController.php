@@ -4,21 +4,22 @@ namespace App\Http\Controllers\Entry;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanyInformation;
+use Illuminate\Http\JsonResponse;
 
 class ShowEntryController extends Controller
 {
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CompanyInformation $companyInformation
+     * @return JsonResponse
      */
-    public function __invoke($id)
+    public function __invoke(CompanyInformation $companyInformation)
     {
         $status = 200;
-        $entry = CompanyInformation::with('entries')->findOrFail($id);
+        $entry = $companyInformation->load('entries');
 
-        if($entry->entries->count() == 0){
+        if ($entry->entries->count() == 0) {
             abort(404);
         }
 
