@@ -25,6 +25,7 @@ use App\Http\Controllers\OccupationalCategory\IndexOccupationalCategoryControlle
 use App\Http\Controllers\Selection\EditSelectionController;
 use App\Http\Controllers\Selection\RegistSelectionController;
 use App\Http\Controllers\Selection\ShowSelectionController;
+use App\Http\Controllers\CompanyComment\RegistCompanyCommentController;
 use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\EditUserProfileController;
 use App\Http\Controllers\User\MyPageController;
@@ -120,6 +121,10 @@ Route::prefix('interview')->group(function () {
     Route::post('/edit/{company_information}', EditInterviewController::class)
         // 編集権限
         ->middleware('can:update,company_information');
+});
+
+Route::prefix('company_comment')->group(function () {
+    Route::post('/', RegistCompanyCommentController::class);
 });
 
 Route::prefix('my_activity')
