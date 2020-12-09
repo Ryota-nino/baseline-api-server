@@ -30,7 +30,7 @@ class SelectionRequest extends FormRequest
             'items' => 'required',
             'items.*.title' => 'required',
             'items.*.content' => 'required',
-            'items.*.interview_date' => 'required|date',
+            'items.*.interview_date' => 'required|integer|between:1,12',
         ];
     }
 }
