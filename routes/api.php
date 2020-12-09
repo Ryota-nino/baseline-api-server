@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Company\DeleteCompanyController;
 use App\Http\Controllers\Company\DetailCompanyController;
+use App\Http\Controllers\Company\DetailCompanyUserController;
 use App\Http\Controllers\Company\EditCompanyController;
 use App\Http\Controllers\Company\RegistCompanyController;
 use App\Http\Controllers\Company\SearchCompanyController;
@@ -80,7 +81,10 @@ Route::prefix('company')->group(function () {
     Route::post('/delete/{id}', DeleteCompanyController::class);
     Route::get('/search', SearchCompanyController::class);
     Route::post('/edit/{id}', EditCompanyController::class);
-    Route::get('/detail/{id}', DetailCompanyController::class);
+    Route::prefix('detail/{company}',)->group(function () {
+        Route::get('/', DetailCompanyController::class);
+        Route::get('/users/{user}', DetailCompanyUserController::class);
+    });
 });
 
 Route::prefix('draft')->group(function () {
