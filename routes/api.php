@@ -100,8 +100,12 @@ Route::prefix('occupational_category')->group(function () {
 
 Route::prefix('selection')->group(function () {
     Route::post('/', RegistSelectionController::class);
-    Route::get('/show/{id}', ShowSelectionController::class);
-    Route::post('/edit/{id}', EditSelectionController::class);
+    Route::get('/show/{company_information}', ShowSelectionController::class)
+        // 編集権限
+        ->middleware('can:update,company_information');
+    Route::post('/edit/{company_information}', EditSelectionController::class)
+        // 編集権限
+        ->middleware('can:update,company_information');
 });
 
 Route::prefix('interview')->group(function () {

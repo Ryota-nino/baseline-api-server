@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Selection;
 
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EditSelectionRequest;
-use App\Models\Selection;
 use App\Models\CompanyInformation;
+use App\Models\Selection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class EditSelectionController extends Controller
@@ -14,30 +14,30 @@ class EditSelectionController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke($id, EditSelectionRequest $request)
+    public function __invoke(CompanyInformation $companyInformation, EditSelectionRequest $request)
     {
-        $company_info = CompanyInformation::with('selections')->findOrFail($id);
+        $company_info = $companyInformation->load('selections');
         //selectionsテーブルと紐付けされていない企業idの場合は処理しない
-        if($company_info->selections->count() == 0){
+        if ($company_info->selections->count() == 0) {
             abort(404);
         }
         $user = Auth::user();
         $status = 200;
         $company_info->user_id = $user->id;
-        
+
         try{
             DB::beginTransaction();
             $company_info->fill($request->all())->update();
-            Selection::query()->where('company_information_id', $id)->delete();
+            Selection::query()->where('company_information_id', $companyInformation->id)->delete();
 
             //selectionsテーブルを更新
             foreach($request->items as $item){
                 $selection = new Selection();
                 $selection->fill($item);
-                $selection->company_information_id = $id;
+                $selection->company_information_id = $companyInformation->id;
                 $selection->save();
             }
             DB::commit();
