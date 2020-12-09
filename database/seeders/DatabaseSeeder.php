@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        User::factory()->make([
             'student_number' => 1000000,
             'first_name' => 'アドミン',
             'last_name' => 'ララベル',
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'laravel-a@example.com',
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
-        ]);
+        ])->save();
 
 
         User::factory(50)->create();
@@ -107,7 +107,7 @@ class DatabaseSeeder extends Seeder
                 $id = DB::table('selections')->insertGetId([
                     'company_information_id' => $companyInformation->id,
                     'title' => $faker->text($faker->numberBetween(7, 50)),
-                    'content' => $faker->text($faker->numberBetween(30, 200)),                        
+                    'content' => $faker->text($faker->numberBetween(30, 200)),
                     'interview_date' => $faker->date()
                 ]);
             });
