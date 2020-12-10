@@ -36,14 +36,44 @@ class DatabaseSeeder extends Seeder
             'year_of_graduation' => Carbon::parse('2021/04/01'),
             'icon_image_path' => 'storage/example_user_icon.jpg',
             'desired_occupations' => 1,
-            'privilege' => 0,
+            'privilege' => 2,
             'email' => 'laravel-a@example.com',
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ])->save();
 
+        User::factory()->make([
+            'student_number' => 1000000,
+            'first_name' => 'ティーチャー',
+            'last_name' => 'ララベル',
+            'sex' => 2,
+            'annual' => 4,
+            'year_of_graduation' => Carbon::parse('2021/04/01'),
+            'icon_image_path' => 'storage/example_user_icon.jpg',
+            'desired_occupations' => 1,
+            'privilege' => 0,
+            'email' => 'laravel-t@example.com',
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ])->save();
 
-        User::factory(50)->create();
+        User::factory()->make([
+            'student_number' => 1000000,
+            'first_name' => 'ユーザー',
+            'last_name' => 'ララベル',
+            'sex' => 2,
+            'annual' => 4,
+            'year_of_graduation' => Carbon::parse('2021/04/01'),
+            'icon_image_path' => 'storage/example_user_icon.jpg',
+            'desired_occupations' => 1,
+            'privilege' => 0,
+            'email' => 'laravel-u@example.com',
+            'password' => Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ])->save();
+
+
+        User::factory(47)->create();
         Draft::factory(200)->create();
 
         $this->call(PrefectureTableSeeder::class);
