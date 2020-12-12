@@ -24,7 +24,7 @@ class RegistCompanyCommentController extends Controller
         $status = 200;
         $message = "OK";
 
-        if (!$company_info->fill(["user_id" => $user->id])->save()) {
+        if (!$company_info->fill(["user_id" => $user->id, "company_id" => $request->company_id])->save()) {
             $status = 400;
             $message = "Bad Request";
         }
@@ -34,7 +34,7 @@ class RegistCompanyCommentController extends Controller
             $message = "Bad Request";
         }
 
-        if (!$company_info->my_activities()->save($compny_comment)) {
+        if (!$company_info->company_comments()->save($compny_comment)) {
             $status = 400;
             $message = "Bad Request";
         }
