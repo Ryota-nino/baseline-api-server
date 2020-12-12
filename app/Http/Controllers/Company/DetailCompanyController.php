@@ -19,6 +19,7 @@ class DetailCompanyController extends Controller
             ->with(
                 'prefectures',
                 'company_information.user',
+                'company_information.internship',
                 'company_information.occupational_category',
                 'company_information.company_comments',
                 'company_information.selections',

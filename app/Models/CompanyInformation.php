@@ -51,4 +51,9 @@ class CompanyInformation extends Model
         return $this->hasOne(OccupationalCategory::class, 'id', 'occupational_category_id');
     }
 
+    public function internship()
+    {
+        return $this->hasOne(Internship::class, 'id', 'internship_id');
+    }
+
 }
