@@ -152,3 +152,10 @@ Route::prefix('internship')
     ->group(function () {
         Route::get('/', IndexInternships::class);
     });
+
+//TODO 直す必要あり
+Route::get('year_of_graduation', function () {
+    return response()->json([
+        'year_of_graduations' => [21, 22, 23, 24]
+    ]);
+});
