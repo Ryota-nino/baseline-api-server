@@ -18,7 +18,6 @@ class CreateMyActivitiesTable extends Migration
             $table->bigInteger('company_information_id')->unsigned();
             $table->text('content');
             $table->bigInteger('posted_year');
-            $table->timestamps();
 
             $table->foreign('company_information_id')->references('id')->on('company_information')
                 ->cascadeOnUpdate()

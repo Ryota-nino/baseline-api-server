@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Company\DeleteCompanyController;
 use App\Http\Controllers\Company\DetailCompanyController;
+use App\Http\Controllers\Company\DetailCompanyUserController;
 use App\Http\Controllers\Company\EditCompanyController;
 use App\Http\Controllers\Company\RegistCompanyController;
 use App\Http\Controllers\Company\SearchCompanyController;
@@ -15,6 +16,7 @@ use App\Http\Controllers\Entry\EditEntryController;
 use App\Http\Controllers\Entry\RegistEntryController;
 use App\Http\Controllers\Entry\ShowEntryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Internship\IndexInternships;
 use App\Http\Controllers\Interview\EditInterviewController;
 use App\Http\Controllers\Interview\RegistInterviewController;
 use App\Http\Controllers\Interview\ShowInterviewController;
@@ -79,7 +81,10 @@ Route::prefix('company')->group(function () {
     Route::post('/delete/{id}', DeleteCompanyController::class);
     Route::get('/search', SearchCompanyController::class);
     Route::post('/edit/{id}', EditCompanyController::class);
-    Route::get('/detail/{id}', DetailCompanyController::class);
+    Route::prefix('detail/{company}',)->group(function () {
+        Route::get('/', DetailCompanyController::class);
+        Route::get('/users/{user}', DetailCompanyUserController::class);
+    });
 });
 
 Route::prefix('draft')->group(function () {
@@ -140,4 +145,10 @@ Route::prefix('post')
         Route::post('/delete/{company_information}', DeleteCompanyInformation::class)
             // 削除権限
             ->middleware('can:delete,company_information');
+    });
+
+Route::prefix('internship')
+    ->middleware('auth:sanctum')
+    ->group(function () {
+        Route::get('/', IndexInternships::class);
     });
