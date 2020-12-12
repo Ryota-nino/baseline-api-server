@@ -28,6 +28,7 @@ use App\Http\Controllers\Selection\EditSelectionController;
 use App\Http\Controllers\Selection\RegistSelectionController;
 use App\Http\Controllers\Selection\ShowSelectionController;
 use App\Http\Controllers\CompanyComment\RegistCompanyCommentController;
+use App\Http\Controllers\EmploymentStatus\ShowEmploymentStatusController;
 use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\EditUserProfileController;
 use App\Http\Controllers\User\MyPageController;
@@ -130,6 +131,10 @@ Route::prefix('interview')->group(function () {
 
 Route::prefix('company_comment')->group(function () {
     Route::post('/', RegistCompanyCommentController::class);
+});
+
+Route::prefix('employmentstatus')->group(function () {
+    Route::get('/show/{id}', ShowEmploymentStatusController::class);
 });
 
 Route::prefix('my_activity')
