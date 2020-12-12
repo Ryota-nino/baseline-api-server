@@ -136,9 +136,6 @@ Route::prefix('company_comment')->group(function () {
 
 Route::prefix('employmentstatus')->group(function () {
     Route::get('/show/{id}', ShowEmploymentStatusController::class);
-});
-
-Route::prefix('employmentstatus')->group(function () {
     Route::post('/edit', EditEmploymentStatusController::class);
 });
 
