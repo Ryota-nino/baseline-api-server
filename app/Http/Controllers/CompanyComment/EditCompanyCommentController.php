@@ -5,10 +5,6 @@ namespace App\Http\Controllers\CompanyComment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyCommentRequest;
 use App\Models\CompanyInformation;
-use App\Models\CompanyComment;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class EditCompanyCommentController extends Controller
 {
