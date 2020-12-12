@@ -107,8 +107,8 @@ class DatabaseSeeder extends Seeder
                 $id = DB::table('selections')->insertGetId([
                     'company_information_id' => $companyInformation->id,
                     'title' => $faker->text($faker->numberBetween(7, 50)),
-                    'content' => $faker->text($faker->numberBetween(30, 200)),
-                    'interview_date' => $faker->date()
+                    'content' => $faker->text($faker->numberBetween(30, 200)),                        
+                    'interview_date' => $faker->numberBetween(1, 12)
                 ]);
             });
         Entry::factory(50)->create();

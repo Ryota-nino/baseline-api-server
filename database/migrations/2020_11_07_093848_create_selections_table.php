@@ -18,7 +18,7 @@ class CreateSelectionsTable extends Migration
             $table->bigInteger('company_information_id')->unsigned();
             $table->string('title');
             $table->text('content')->nullable();
-            $table->date('interview_date');
+            $table->bigInteger('interview_date');
 
             $table->foreign('company_information_id')->references('id')->on('company_information')->cascadeOnUpdate()->cascadeOnDelete();
         });
