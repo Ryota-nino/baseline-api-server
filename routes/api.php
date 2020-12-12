@@ -29,6 +29,7 @@ use App\Http\Controllers\Selection\RegistSelectionController;
 use App\Http\Controllers\Selection\ShowSelectionController;
 use App\Http\Controllers\CompanyComment\RegistCompanyCommentController;
 use App\Http\Controllers\EmploymentStatus\ShowEmploymentStatusController;
+use App\Http\Controllers\EmploymentStatus\EditEmploymentStatusController;
 use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\EditUserProfileController;
 use App\Http\Controllers\User\MyPageController;
@@ -135,6 +136,10 @@ Route::prefix('company_comment')->group(function () {
 
 Route::prefix('employmentstatus')->group(function () {
     Route::get('/show/{id}', ShowEmploymentStatusController::class);
+});
+
+Route::prefix('employmentstatus')->group(function () {
+    Route::post('/edit', EditEmploymentStatusController::class);
 });
 
 Route::prefix('my_activity')
