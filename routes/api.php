@@ -28,6 +28,8 @@ use App\Http\Controllers\Selection\EditSelectionController;
 use App\Http\Controllers\Selection\RegistSelectionController;
 use App\Http\Controllers\Selection\ShowSelectionController;
 use App\Http\Controllers\CompanyComment\RegistCompanyCommentController;
+use App\Http\Controllers\CompanyComment\ShowCompanyCommentController;
+use App\Http\Controllers\CompanyComment\EditCompanyCommentController;
 use App\Http\Controllers\EmploymentStatus\ShowEmploymentStatusController;
 use App\Http\Controllers\EmploymentStatus\EditEmploymentStatusController;
 use App\Http\Controllers\User\DeleteUserController;
@@ -132,6 +134,12 @@ Route::prefix('interview')->group(function () {
 
 Route::prefix('company_comment')->group(function () {
     Route::post('/', RegistCompanyCommentController::class);
+    Route::get('/show/{company_information}', ShowCompanyCommentController::class)
+        // 編集権限
+        ->middleware('can:update,company_information');
+    Route::post('/edit/{company_information}', EditCompanyCommentController::class)
+        // 編集権限
+        ->middleware('can:update,company_information');
 });
 
 Route::prefix('employmentstatus')->group(function () {
