@@ -15,7 +15,7 @@ class InternshipsTable extends Migration
     {
         Schema::create('internships', function (Blueprint $table) {
             $table->id();
-            $table->string('internship_name');
+            $table->string('name');
         });
     }
 

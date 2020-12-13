@@ -15,10 +15,10 @@ class InternshipSeeder extends Seeder
     public function run()
     {
         DB::table('internships')->insert([
-            ['internship_name' => 'サマーインターン'],
-            ['internship_name' => 'ウィンターインターン'],
-            ['internship_name' => 'スプリングインターン'],
-            ['internship_name' => '本選考'],
+            ['name' => 'サマーインターン'],
+            ['name' => 'ウィンターインターン'],
+            ['name' => 'スプリングインターン'],
+            ['name' => '本選考'],
         ]);
     }
 }

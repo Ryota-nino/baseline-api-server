@@ -11,6 +11,6 @@ class Internship extends Model
 
     public $timestamps = false;
     protected $fillable = [
-        'internship_name'
+        'name'
     ];
 }
