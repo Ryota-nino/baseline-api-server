@@ -31,7 +31,7 @@ class UserFactory extends Factory
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
             'sex' => $this->faker->numberBetween(0, 2),
-            'icon_image_path' => 'storage/example_user_icon.jpg',
+//            'icon_image_path' => '',
             'annual' => $this->faker->numberBetween(0, $annual),
             'year_of_graduation' => $carbon->addYears($annual),
 //            'activity_stats' => $this->faker->numberBetween(0, 4),

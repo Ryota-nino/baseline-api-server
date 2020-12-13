@@ -62,7 +62,10 @@ class User extends Authenticatable
 
     public function getIconImageUrlAttribute()
     {
-        return asset($this->icon_image_path);
+
+        return $this->icon_image_path
+            ? asset($this->icon_image_path)
+            : null;
     }
 
     public function getGraduationFlagAttribute()

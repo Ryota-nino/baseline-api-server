@@ -28,7 +28,9 @@ class Company extends Model
 
     public function getLogoImageUrlAttribute()
     {
-        return asset($this->logo_path);
+        return $this->logo_path
+            ? asset($this->logo_path)
+            : null;
     }
 
     public function company_information()
