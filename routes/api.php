@@ -8,10 +8,15 @@ use App\Http\Controllers\Company\EditCompanyController;
 use App\Http\Controllers\Company\RegistCompanyController;
 use App\Http\Controllers\Company\SearchCompanyController;
 use App\Http\Controllers\Company\ShowCompanyController;
+use App\Http\Controllers\CompanyComment\EditCompanyCommentController;
+use App\Http\Controllers\CompanyComment\RegistCompanyCommentController;
+use App\Http\Controllers\CompanyComment\ShowCompanyCommentController;
 use App\Http\Controllers\CompanyInformation\DeleteCompanyInformation;
 use App\Http\Controllers\Draft\DeleteDraftController;
 use App\Http\Controllers\Draft\IndexDraftController;
 use App\Http\Controllers\Draft\RegistDraftController;
+use App\Http\Controllers\EmploymentStatus\EditEmploymentStatusController;
+use App\Http\Controllers\EmploymentStatus\ShowEmploymentStatusController;
 use App\Http\Controllers\Entry\EditEntryController;
 use App\Http\Controllers\Entry\RegistEntryController;
 use App\Http\Controllers\Entry\ShowEntryController;
@@ -27,11 +32,6 @@ use App\Http\Controllers\OccupationalCategory\IndexOccupationalCategoryControlle
 use App\Http\Controllers\Selection\EditSelectionController;
 use App\Http\Controllers\Selection\RegistSelectionController;
 use App\Http\Controllers\Selection\ShowSelectionController;
-use App\Http\Controllers\CompanyComment\RegistCompanyCommentController;
-use App\Http\Controllers\CompanyComment\ShowCompanyCommentController;
-use App\Http\Controllers\CompanyComment\EditCompanyCommentController;
-use App\Http\Controllers\EmploymentStatus\ShowEmploymentStatusController;
-use App\Http\Controllers\EmploymentStatus\EditEmploymentStatusController;
 use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\EditUserProfileController;
 use App\Http\Controllers\User\MyPageController;
@@ -176,6 +176,9 @@ Route::prefix('internship')
 //TODO 直す必要あり
 Route::get('year_of_graduation', function () {
     return response()->json([
-        'year_of_graduations' => [21, 22, 23, 24]
+        ["id" => 21, "name" => "21"],
+        ["id" => 22, "name" => "22"],
+        ["id" => 23, "name" => "23"],
+        ["id" => 24, "name" => "24"],
     ]);
 });
