@@ -72,6 +72,7 @@ Route::get('/home', HomeController::class);
 Route::get('/mypage', MyPageController::class);
 Route::get('/mypage/{id}', MyPageController::class);
 
+/* ユーザー */
 Route::prefix('user')->group(function () {
     Route::post('/', TemporaryRegistationUserController::class);
     Route::post('/delete/{id}', DeleteUserController::class);
@@ -80,6 +81,7 @@ Route::prefix('user')->group(function () {
     Route::post('/edit/{id}', EditUserProfileController::class);
 });
 
+/* 企業 */
 Route::prefix('company')->group(function () {
     Route::post('/', RegistCompanyController::class);
     Route::get('/show/{id}', ShowCompanyController::class);
@@ -92,61 +94,78 @@ Route::prefix('company')->group(function () {
     });
 });
 
-Route::prefix('draft')->group(function () {
-    Route::get('/', IndexDraftController::class);
-    Route::post('/', RegistDraftController::class);
-    Route::post('/delete/{id}', DeleteDraftController::class);
-});
+/* 下描き */
+Route::prefix('draft')
+    ->middleware('auth:sanctum')
+    ->group(function () {
+        Route::get('/', IndexDraftController::class);
+        Route::post('/', RegistDraftController::class);
+        Route::post('/delete/{id}', DeleteDraftController::class);
+    });
 
-Route::prefix('entry')->group(function () {
-    Route::middleware('auth:sanctum')->post('/', RegistEntryController::class);
-    Route::post('/edit/{company_information}', EditEntryController::class)
-        // 編集権限
-        ->middleware('can:update,company_information');
-    Route::get('/show/{company_information}', ShowEntryController::class)
-        // 編集権限
-        ->middleware('can:update,company_information');
-});
+/* エントリー */
+Route::prefix('entry')
+    ->middleware('auth:sanctum')
+    ->group(function () {
+        Route::post('/', RegistEntryController::class);
+        Route::post('/edit/{company_information}', EditEntryController::class)
+            // 編集権限
+            ->middleware('can:update,company_information');
+        Route::get('/show/{company_information}', ShowEntryController::class)
+            // 編集権限
+            ->middleware('can:update,company_information');
+    });
 
 Route::prefix('occupational_category')->group(function () {
     Route::get('/', IndexOccupationalCategoryController::class);
 });
 
-Route::prefix('selection')->group(function () {
-    Route::post('/', RegistSelectionController::class);
-    Route::get('/show/{company_information}', ShowSelectionController::class)
-        // 編集権限
-        ->middleware('can:update,company_information');
-    Route::post('/edit/{company_information}', EditSelectionController::class)
-        // 編集権限
-        ->middleware('can:update,company_information');
-});
+/* 選考 */
+Route::prefix('selection')
+    ->middleware('auth:sanctum')
+    ->group(function () {
+        Route::post('/', RegistSelectionController::class);
+        Route::get('/show/{company_information}', ShowSelectionController::class)
+            // 編集権限
+            ->middleware('can:update,company_information');
+        Route::post('/edit/{company_information}', EditSelectionController::class)
+            // 編集権限
+            ->middleware('can:update,company_information');
+    });
 
-Route::prefix('interview')->group(function () {
-    Route::post('/', RegistInterviewController::class);
-    Route::get('/show/{company_information}', ShowInterviewController::class)
-        // 編集権限
-        ->middleware('can:update,company_information');
-    Route::post('/edit/{company_information}', EditInterviewController::class)
-        // 編集権限
-        ->middleware('can:update,company_information');
-});
+/* 面接 */
+Route::prefix('interview')
+    ->middleware('auth:sanctum')
+    ->group(function () {
+        Route::post('/', RegistInterviewController::class);
+        Route::get('/show/{company_information}', ShowInterviewController::class)
+            // 編集権限
+            ->middleware('can:update,company_information');
+        Route::post('/edit/{company_information}', EditInterviewController::class)
+            // 編集権限
+            ->middleware('can:update,company_information');
+    });
 
-Route::prefix('company_comment')->group(function () {
-    Route::post('/', RegistCompanyCommentController::class);
-    Route::get('/show/{company_information}', ShowCompanyCommentController::class)
-        // 編集権限
-        ->middleware('can:update,company_information');
-    Route::post('/edit/{company_information}', EditCompanyCommentController::class)
-        // 編集権限
-        ->middleware('can:update,company_information');
-});
+/* 企業コメント */
+Route::prefix('company_comment')
+    ->middleware('auth:sanctum')
+    ->group(function () {
+        Route::post('/', RegistCompanyCommentController::class);
+        Route::get('/show/{company_information}', ShowCompanyCommentController::class)
+            // 編集権限
+            ->middleware('can:update,company_information');
+        Route::post('/edit/{company_information}', EditCompanyCommentController::class)
+            // 編集権限
+            ->middleware('can:update,company_information');
+    });
 
+/* 就職状況 */
 Route::prefix('employmentstatus')->group(function () {
     Route::get('/show/{id}', ShowEmploymentStatusController::class);
     Route::post('/edit', EditEmploymentStatusController::class);
 });
 
+/* マイアクティビティ */
 Route::prefix('my_activity')
     ->middleware('auth:sanctum')
     ->group(function () {
@@ -159,6 +178,7 @@ Route::prefix('my_activity')
             ->middleware('can:update,company_information');
     });
 
+/* 投稿削除 */
 Route::prefix('post')
     ->middleware('auth:sanctum')
     ->group(function () {
@@ -167,6 +187,7 @@ Route::prefix('post')
             ->middleware('can:delete,company_information');
     });
 
+/* インターンシップ */
 Route::prefix('internship')
     ->middleware('auth:sanctum')
     ->group(function () {
@@ -174,6 +195,7 @@ Route::prefix('internship')
     });
 
 //TODO 直す必要あり
+// 卒業年次リスト
 Route::get('year_of_graduation', function () {
     return response()->json([
         ["id" => 21, "name" => "21"],
