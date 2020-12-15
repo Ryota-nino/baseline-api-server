@@ -13,15 +13,10 @@ class DeleteDraftController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke($id)
+    public function __invoke(Draft $draft)
     {
-        $status = 200;
-        $message = 'OK';
+        $draft->delete();
 
-        Draft::query()->findOrFail($id)->delete();
-
-        return response()->json([
-            'message' => $message
-        ], $status);
+        return response()->json(["message" => "OK"]);
     }
 }

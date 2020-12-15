@@ -100,7 +100,8 @@ Route::prefix('draft')
     ->group(function () {
         Route::get('/', IndexDraftController::class);
         Route::post('/', RegistDraftController::class);
-        Route::post('/delete/{id}', DeleteDraftController::class);
+        Route::post('/delete/{draft}', DeleteDraftController::class)
+            ->middleware('can:delete,draft');
     });
 
 /* エントリー */
