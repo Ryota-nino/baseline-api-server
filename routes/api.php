@@ -68,9 +68,11 @@ Route::prefix('auth')->group(function () {
     Route::middleware('auth:sanctum')->post('/password_change', PasswordChangeController::class);
 });
 
-Route::get('/home', HomeController::class);
-Route::get('/mypage', MyPageController::class);
-Route::get('/mypage/{id}', MyPageController::class);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/home', HomeController::class);
+    Route::get('/mypage', MyPageController::class);
+    Route::get('/mypage/{id}', MyPageController::class);
+});
 
 /* ユーザー */
 Route::prefix('user')->group(function () {
