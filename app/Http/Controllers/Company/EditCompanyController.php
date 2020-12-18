@@ -16,10 +16,8 @@ class EditCompanyController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke($id, CompanyRequest $request)
+    public function __invoke(Company $company, CompanyRequest $request)
     {
-        $company = Company::findOrfail($id);
-
         $company->prefectures()->detach();
         $company->prefectures()->attach($request->prefecture_id);
 

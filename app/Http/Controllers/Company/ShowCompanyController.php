@@ -13,13 +13,13 @@ class ShowCompanyController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke($id)
+    public function __invoke(Company $company)
     {
         //ToDo Validate
 
         $status = 200;
 
-        $company = Company::with('prefectures:id')->findOrfail($id);
+        $company = $company->load('prefectures:id');
 
         return response()->json(
             $company, $status

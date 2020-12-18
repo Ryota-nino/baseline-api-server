@@ -13,13 +13,13 @@ class DeleteCompanyController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke($id)
+    public function __invoke(Company $company)
     {
         $status = 200;
         $message = 'OK';
 
 
-        Company::findOrFail($id)->delete();
+        $company->delete();
 
         return response()->json([
             'message' => $message
