@@ -38,6 +38,11 @@ class SearchUserController extends Controller
             $users->whereIn('desired_occupations', $desired_occupations_id);
         }
 
+        // 卒業年次検索
+        if ($year_of_graduation) {
+            $users->whereYear('year_of_graduation', '=', '20' . $year_of_graduation);
+        }
+
         // フリーワードで検索
         if ($free_word) {
             //TODO フルネームで検索するように変更
