@@ -25,7 +25,7 @@ class SearchUserController extends Controller
         // 古い順
         $older = $request->query('older');
 
-        //TODO 卒業年次検索
+        //卒業年次検索
         $year_of_graduation = $request->query('year_of_graduation');
 
         // 卒業フラグ
