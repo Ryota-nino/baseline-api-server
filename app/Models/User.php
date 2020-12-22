@@ -85,4 +85,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(CompanyInformation::class);
     }
+
+    public function my_activities()
+    {
+        return $this->hasManyThrough(MyActivity::class, CompanyInformation::class, 'user_id', 'company_information_id', 'id');
+    }
 }
