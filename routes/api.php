@@ -86,10 +86,17 @@ Route::prefix('user')->group(function () {
 /* 企業 */
 Route::prefix('company')->group(function () {
     Route::post('/', RegistCompanyController::class);
-    Route::get('/show/{id}', ShowCompanyController::class);
-    Route::post('/delete/{id}', DeleteCompanyController::class);
+    Route::get('/show/{company}', ShowCompanyController::class)
+        //編集権限
+        ->middleware('can:update,company');
+    Route::post('/edit/{company}', EditCompanyController::class)
+        //編集権限
+        ->middleware('can:update,company');
+    Route::post('/delete/{company}', DeleteCompanyController::class)
+        //削除権限
+        ->middleware('can:delete,company');
     Route::get('/search', SearchCompanyController::class);
-    Route::post('/edit/{id}', EditCompanyController::class);
+    
     Route::prefix('detail/{company}',)->group(function () {
         Route::get('/', DetailCompanyController::class);
         Route::get('/users/{user}', DetailCompanyUserController::class);

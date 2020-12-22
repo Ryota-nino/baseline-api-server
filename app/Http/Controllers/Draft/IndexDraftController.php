@@ -16,7 +16,7 @@ class IndexDraftController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function __invoke(Request $request)
+    public function __invoke()
     {
         $user = Auth::user();
 
