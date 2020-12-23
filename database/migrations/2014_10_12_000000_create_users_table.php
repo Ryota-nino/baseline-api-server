@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->bigInteger('sex')->nullable(); # 性別
             $table->string('icon_image_path')->nullable(); # ユーザーアイコン
             $table->bigInteger('annual')->nullable(); # 年次
-            $table->date('year_of_graduation')->nullable(); # 卒業年次
+            $table->bigInteger('year_of_graduation')->nullable(); # 卒業年次
 //            $table->string('activity_stats');
             $table->string('desired_occupations')->nullable(); # 希望職種
             $table->string('privilege')->nullable(); # 権限

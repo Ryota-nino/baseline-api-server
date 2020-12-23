@@ -10,7 +10,6 @@ use App\Models\EmploymentStatus;
 use App\Models\Entry;
 use App\Models\MyActivity;
 use App\Models\User;
-use Carbon\Carbon;
 use Faker\Factory as FakerFactory;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Seeder;
@@ -33,7 +32,7 @@ class DatabaseSeeder extends Seeder
             'last_name' => 'ララベル',
             'sex' => 2,
             'annual' => 4,
-            'year_of_graduation' => Carbon::parse('2021/04/01'),
+            'year_of_graduation' => 21,
             'icon_image_path' => 'storage/example_user_icon.jpg',
             'desired_occupations' => 1,
             'privilege' => 2,
@@ -48,7 +47,7 @@ class DatabaseSeeder extends Seeder
             'last_name' => 'ララベル',
             'sex' => 2,
             'annual' => 4,
-            'year_of_graduation' => Carbon::parse('2021/04/01'),
+            'year_of_graduation' => 21,
             'icon_image_path' => 'storage/example_user_icon.jpg',
             'desired_occupations' => 1,
             'privilege' => 0,
@@ -63,7 +62,7 @@ class DatabaseSeeder extends Seeder
             'last_name' => 'ララベル',
             'sex' => 2,
             'annual' => 4,
-            'year_of_graduation' => Carbon::parse('2021/04/01'),
+            'year_of_graduation' => 21,
             'icon_image_path' => 'storage/example_user_icon.jpg',
             'desired_occupations' => 1,
             'privilege' => 0,
@@ -137,7 +136,7 @@ class DatabaseSeeder extends Seeder
                 $id = DB::table('selections')->insertGetId([
                     'company_information_id' => $companyInformation->id,
                     'title' => $faker->text($faker->numberBetween(7, 50)),
-                    'content' => $faker->text($faker->numberBetween(30, 200)),                        
+                    'content' => $faker->text($faker->numberBetween(30, 200)),
                     'interview_date' => $faker->numberBetween(1, 12)
                 ]);
             });
