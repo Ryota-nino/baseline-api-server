@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SearchUserController extends Controller
@@ -39,8 +40,9 @@ class SearchUserController extends Controller
         }
 
         // 卒業年次検索
+//        dd(intval($year_of_graduation));
         if ($year_of_graduation) {
-            $users->whereYear('year_of_graduation', '=', '20' . $year_of_graduation);
+            $users->where('year_of_graduation', '=', $year_of_graduation);
         }
 
         // フリーワードで検索
@@ -57,7 +59,7 @@ class SearchUserController extends Controller
 
         // 卒業生のみデフォルトはTrue
         if ($graduation) {
-            $users->where('year_of_graduation', '>', now());
+            $users->where('year_of_graduation', '>', Carbon::now()->subMonthsNoOverflow(3)->format('y'));
         }
 
         // 最新順にする処理

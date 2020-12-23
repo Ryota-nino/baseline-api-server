@@ -25,7 +25,7 @@ class RegistUserController extends Controller
             'last_name' => 'required|string',
             'sex' => 'required|integer|between:0,2', // 0:男, 1:女, 2:その他
             'annual' => 'required|integer|min:1',
-            'year_of_graduation' => 'required|date',
+            'year_of_graduation' => 'required|integer|digits:2',
             'desired_occupations' => 'required|exists:occupational_categories,id',
             'password' => 'required'
         ]);

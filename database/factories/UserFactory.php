@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
@@ -23,7 +22,6 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $carbon = Carbon::parse('2020/04/01');
         $annual = $this->faker->numberBetween(2, 4);
 
         return [
@@ -31,9 +29,8 @@ class UserFactory extends Factory
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
             'sex' => $this->faker->numberBetween(0, 2),
-//            'icon_image_path' => '',
             'annual' => $this->faker->numberBetween(0, $annual),
-            'year_of_graduation' => $carbon->addYears($annual),
+            'year_of_graduation' => 20 + $this->faker->numberBetween($annual, 4),
 //            'activity_stats' => $this->faker->numberBetween(0, 4),
             'desired_occupations' => $this->faker->numberBetween(1, 25),
             'privilege' => 0,
