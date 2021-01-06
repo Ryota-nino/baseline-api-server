@@ -36,6 +36,7 @@ use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\EditUserProfileController;
 use App\Http\Controllers\User\MyPageController;
 use App\Http\Controllers\User\PasswordChangeController;
+use App\Http\Controllers\User\PasswordResetController;
 use App\Http\Controllers\User\PasswordResetToMailController;
 use App\Http\Controllers\User\RegistUserController;
 use App\Http\Controllers\User\SearchUserController;
@@ -68,6 +69,7 @@ Route::prefix('auth')->group(function () {
     Route::middleware('auth:sanctum')->get('/user', ShowUserController::class);
     Route::middleware('auth:sanctum')->post('/password_change', PasswordChangeController::class);
     Route::post('/password_reset_mail', PasswordResetToMailController::class);
+    Route::post('/password_reset', PasswordResetController::class);
 });
 
 Route::middleware('auth:sanctum')->group(function () {

@@ -28,7 +28,10 @@ class PasswordResetToMailController extends Controller
         $password_reset = PasswordReset::query()
             ->where('email', '=', $request->email)
             ->firstOrCreate(
-                ['email' => $request->email]
+                [
+                    'email' => $request->email,
+                    'token' => Uuid::uuid4()
+                ]
             );
 
         $password_reset->fill(['token' => Uuid::uuid4(), 'created_at' => now()]);

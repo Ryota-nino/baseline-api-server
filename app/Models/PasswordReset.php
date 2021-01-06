@@ -13,6 +13,7 @@ class PasswordReset extends Model
     protected $table = 'password_resets';
     protected $fillable = ['email', 'token', 'created_at'];
     protected $primaryKey = 'email';
+    public $incrementing = false;
 
     public static function boot()
     {
