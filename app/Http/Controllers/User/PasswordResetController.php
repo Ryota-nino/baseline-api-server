@@ -28,15 +28,6 @@ class PasswordResetController extends Controller
         $password_reset = PasswordReset::query()
             ->where('token', 'like', "$token")
             ->firstOrFail();
-//
-//        if (!$password_reset
-//            ->exists()
-//        ) {
-//            // 存在しなかったとき
-//            return \response()->json([
-//                "message" => "Bad request"
-//            ], 400);
-//        }
 
         // メールのユーザーを見つける
         $user = User::query()
