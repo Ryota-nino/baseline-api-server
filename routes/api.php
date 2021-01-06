@@ -36,6 +36,7 @@ use App\Http\Controllers\User\DeleteUserController;
 use App\Http\Controllers\User\EditUserProfileController;
 use App\Http\Controllers\User\MyPageController;
 use App\Http\Controllers\User\PasswordChangeController;
+use App\Http\Controllers\User\PasswordResetController;
 use App\Http\Controllers\User\RegistUserController;
 use App\Http\Controllers\User\SearchUserController;
 use App\Http\Controllers\User\ShowUserController;
@@ -66,6 +67,7 @@ Route::prefix('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']); // ログアウト
     Route::middleware('auth:sanctum')->get('/user', ShowUserController::class);
     Route::middleware('auth:sanctum')->post('/password_change', PasswordChangeController::class);
+    Route::post('/password_reset', PasswordResetController::class);
 });
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -96,7 +98,7 @@ Route::prefix('company')->group(function () {
         //削除権限
         ->middleware('can:delete,company');
     Route::get('/search', SearchCompanyController::class);
-    
+
     Route::prefix('detail/{company}',)->group(function () {
         Route::get('/', DetailCompanyController::class);
         Route::get('/users/{user}', DetailCompanyUserController::class);
