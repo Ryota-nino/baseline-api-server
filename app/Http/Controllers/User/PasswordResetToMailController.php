@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PasswordResetMail;
 use App\Models\PasswordReset;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Ramsey\Uuid\Uuid;
 
 class PasswordResetToMailController extends Controller
@@ -12,10 +15,10 @@ class PasswordResetToMailController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): JsonResponse
     {
         //メールからユーザを取り出す処理
         $this->validate($request, ['email' => 'required|email']);
@@ -32,8 +35,10 @@ class PasswordResetToMailController extends Controller
         $password_reset->save();
 
         //TODO メールを送る
+        Mail::to($request->email)->send(new PasswordResetMail($password_reset->token));
 
-
-        //TODO　
+        return response()->json([
+            'message' => "OK"
+        ], 200);
     }
 }
