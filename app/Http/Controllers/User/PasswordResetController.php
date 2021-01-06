@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Ramsey\Uuid\Uuid;
 
 class PasswordResetController extends Controller
 {
@@ -20,10 +21,16 @@ class PasswordResetController extends Controller
         //メールからユーザを取り出す処理
         $this->validate($request, ['email' => 'required|email']);
 
-        $user = User::query()->where('email', 'like', $request->email)->firstOrFail();
+        // トークンの作成
+        // なければ作成
+        $password_reset = PasswordReset::query()
+            ->where('email', '=', $request->email)
+            ->firstOrCreate(
+                ['email' => $request->email]
+            );
 
-
-        //TODO トークンの作成
+        $password_reset->fill(['token' => Uuid::uuid4(), 'created_at' => now()]);
+        $password_reset->save();
 
         //TODO メールを送る
 
