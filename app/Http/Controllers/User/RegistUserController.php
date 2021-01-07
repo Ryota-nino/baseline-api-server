@@ -62,7 +62,6 @@ class RegistUserController extends Controller
             ->fill([
                 'password' => Hash::make($validated_request['password']),
                 'icon_image_path' => $icon_path,
-                'privilege' => 0,
                 'email_verified_at' => now()
             ])->save()) {
             $status = 400;

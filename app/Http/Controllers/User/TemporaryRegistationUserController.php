@@ -17,7 +17,7 @@ class TemporaryRegistationUserController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request, $id)
     {
         $user = new User(); // ユーザ
         $status = 200;
@@ -28,7 +28,7 @@ class TemporaryRegistationUserController extends Controller
             'email' => 'required|email|unique:users'
         ]);
 
-        if (!$user->fill(['email' => $request->email])->save()) {
+        if (!$user->fill(['email' => $request->email, 'privilege' => $id])->save()) {
             $status = 400;
             $message = 'Bad Request';
         } else {
