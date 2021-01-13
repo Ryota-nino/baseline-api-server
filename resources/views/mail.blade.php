@@ -1,8 +1,12 @@
+Baseline運営局です。<br><br>
+
 この度は、就活情報共有サービス「Baseline」にお申し込み頂きまして誠にありがとうございます。<br><br>
 
 ご本人様確認のため、下記URLへ「24時間以内」にアクセスし、
 アカウントの本登録を完了させて下さい。<br>
-<a href="http://localhost:3000/#/register/insert?token={{$token}}">http://localhost:3000/#/register/insert?token={{$token}}</a>
+<a href="http://localhost:3000/#/register/insert?token={{$token}}">
+    http://localhost:3000/#/register/insert?token={{$token}}
+</a>
 <br>
 
 ※当メール送信後、24時間を超過しますと、セキュリティ保持のため有効期限切れとなります。その場合は再度、最初からお手続きをお願い致します。<br>
