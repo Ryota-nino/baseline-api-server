@@ -80,7 +80,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 /* ユーザー */
 Route::prefix('user')->group(function () {
-    Route::post('/{id}', TemporaryRegistationUserController::class);
+    Route::post('/temporary_register/{id}', TemporaryRegistationUserController::class);
     Route::post('/delete/{id}', DeleteUserController::class);
     Route::post('/register', RegistUserController::class);
     Route::get('/search', SearchUserController::class);
