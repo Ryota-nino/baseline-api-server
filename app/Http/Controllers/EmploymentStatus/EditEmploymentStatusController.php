@@ -20,5 +20,9 @@ class EditEmploymentStatusController extends Controller
         $user = Auth::user();
         $company = Company::query()->findOrFail($request->company_id);
         $company->users()->syncWithoutDetaching([$user->id=>$request->all()]);
+
+        return response()->json([
+            'message' => 'OK',
+        ]);
     }
 }
