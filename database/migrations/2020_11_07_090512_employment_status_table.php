@@ -22,7 +22,7 @@ class EmploymentStatusTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreign('company_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('company_id')->references('id')->on('companies')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreign('occupational_category_id')->references('id')->on('occupational_categories')->cascadeOnUpdate()->cascadeOnDelete();
             $table->primary(['company_id', 'user_id']);
         });
