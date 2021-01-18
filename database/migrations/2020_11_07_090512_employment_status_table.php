@@ -16,7 +16,6 @@ class EmploymentStatusTable extends Migration
         Schema::create('employment_statuses', function (Blueprint $table) {
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('company_id')->unsigned();
-            $table->bigInteger('official_offer')->unsigned();
             $table->bigInteger('decision_offer')->unsigned();
             $table->bigInteger('occupational_category_id')->unsigned();
             $table->timestamps();

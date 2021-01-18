@@ -11,7 +11,6 @@ class EmploymentStatus extends Model
 
     protected $fillable = [
         'company_id',
-        'official_offer',
         'decision_offer',
         'occupatioal_category_id',
     ];

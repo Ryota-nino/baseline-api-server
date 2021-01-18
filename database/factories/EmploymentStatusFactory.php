@@ -24,7 +24,6 @@ class EmploymentStatusFactory extends Factory
         return [
             'user_id' => $this->faker->numberBetween(1, 50),
             'company_id' => $this->faker->numberBetween(1, 50),
-            'official_offer' => $this->faker->numberBetween(0, 1),
             'decision_offer' => $this->faker->numberBetween(0, 1),
             'occupational_category_id' => $this->faker->numberBetween(1, 25),
         ];
