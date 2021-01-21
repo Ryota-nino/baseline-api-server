@@ -26,6 +26,6 @@ class InternshipsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('internships');
     }
 }

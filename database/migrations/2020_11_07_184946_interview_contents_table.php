@@ -29,6 +29,6 @@ class InterviewContentsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('interview_contents');
     }
 }

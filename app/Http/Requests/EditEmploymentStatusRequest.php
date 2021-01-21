@@ -25,7 +25,6 @@ class EditEmploymentStatusRequest extends FormRequest
     {
         return [
             'company_id'=>'required|integer',
-            'official_offer'=>'required|boolean',
             'decision_offer'=>'required|boolean',
             'occupational_category_id'=>'required|between:1,25',
         ];
