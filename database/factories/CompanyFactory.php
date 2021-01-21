@@ -26,7 +26,6 @@ class CompanyFactory extends Factory
             'company_name' => $this->faker->companySuffix . $this->faker->company,
             'number_of_employees' => $this->faker->numberBetween(0, 100000),
             'business_description' => $this->faker->sentence,
-//            'logo_path' => 'public/wkpfjwjdnljiapuw94.png',
             'company_url' => $this->faker->url,
         ];
     }
