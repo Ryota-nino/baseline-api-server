@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -23,7 +23,7 @@ class DeploySeeder extends Seeder
             'sex' => 2,
             'annual' => 4,
             'year_of_graduation' => 21,
-            'icon_image_path' => 'storage/example_user_icon.jpg',
+            'icon_image_path' => '',
             'desired_occupations' => 1,
             'privilege' => 2,
             'email' => 'laravel-a@example.com',
